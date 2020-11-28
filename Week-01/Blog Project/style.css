@@ -1,0 +1,72 @@
+/*-------------------------------*/  
+/* DEFAULTS*/
+/*-------------------------------*/  
+/* html{font-size: 10; } */
+body {    margin: 0px; }
+h1 {      margin:0;   padding: 0;}
+h2 {      margin:0;   padding: 0;   font-size: 1.3rem; font-weight:500; }
+/* h3 {        margin:0;   padding: 0;} */
+h3 {  font-weight:normal;  }
+/* #Content {  margin-top: 100px;    margin-bottom: 50px;} */
+label { font-size:0.8rem; font-weight:bold;}
+
+.post-title-text{
+    font-size:1.3rem;
+}
+.post-body-text{
+    font-size:1rem;
+}
+
+/*-------------------------------*/  
+/* BASICS*/
+/*-------------------------------*/  
+
+.nav-bar{
+    background-color: rgb(83, 81, 81);
+    padding: 10px 0px;
+    margin:0px 0px 10px 0px;
+}
+
+.align-main{
+    padding-right:15%;
+    padding-left:15%;
+}
+
+/*-------------------------------*/  
+/* New post*/
+/*-------------------------------*/  
+#Input-title{
+    margin-bottom:10px
+}
+#Input-content{
+    margin-bottom:8px
+}
+
+#Input-content-field{
+    width: 100%; 
+    /* height: 125px; */
+    border-radius: 2px;
+    border-width: 1px;
+}
+#Btn-submit{
+    padding-left:20px;
+    padding-right:20px;
+    font-size:0.8rem;
+    font-weight:450;
+    border-radius: 3px;
+    border-width: 2px;
+}
+
+/*-------------------------------*/  
+/* Old posts*/
+/*-------------------------------*/  
+
+.post{
+    border: 1px solid;
+    padding: 1px 2px;
+    margin-bottom: 10px;
+}
+
+.post-title{
+
+}

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>
+        Buk-o-Blog
+    </title>
+    <!-- <link rel = "icon"        href = "assets/aperture.svg"         type = "image/x-icon"  >  -->
+    <link rel = "stylesheet"  href = "style.css"  >
+</head>
+<script>
+    function postit()
+    {
+        var post = document.createElement("div");
+        post.class ="post";
+        var postTitle = document.createElement("h2");
+        postTitle.class ="post-title";
+        postTitle.appendChild(document.myform.title.value);
+        var postBodyText = document.createElement("div");
+        postBodyText.class ="post-body-text";
+        postBodyText.appendChild(document.myform.title.value);
+        post.appendChild(postTitle);
+        post.appendChild(postBodyText);
+        
+        document.body.appendChild(post);
+        document.getElementById("Post2").innerHTML ="EcPec";
+    }
+</script>
+<body>
+    <nav  class="nav-bar">
+      <div  class="nav-middle align-main">
+          <div  class="nav-picture">
+            <span ID="Blogtitle"><H1>Buk-O-Blog</H1></span>
+          </div>
+      </div>
+    </nav>
+    
+    <div ID="Content" class="align-main">
+        <!-- Add NEW section -->
+        <div ID="NewPost" class="">
+            <div ID="Section1-title" class="">
+                <h3>Add new post</h3> 
+            </div>
+            <form name="myform" action="">
+                <div ID="Input-title" class="">
+                    <label for="title" ID="Input-title-label" class="">
+                        Title
+                    </label><br>
+                    <input type="text" id="Input-title-field" name="title" 
+                    class="post-title-text">
+                </div>
+                <div ID="Input-content" class="">
+                    <label for="content" ID="Input-content-label" class="">
+                        Content
+                    </label>
+                    <textarea type="text" id="Input-content-field" name="content" rows="5"
+                    class="post-body-text">
+                    </textarea>
+                </div>
+                <input ID="Btn-submit" type="submit" value="Submit" onclick="postit(); return false">
+                <div  class="">
+                    
+                </div>
+            </form>
+        </div>
+        <!-- History section -->
+        <div ID="PostHistory" class="">
+            <div ID="Section2-title" class="">
+                <h3>Posts</h3> 
+            </div>
+            <div ID="PostsBody" class="">
+                <div ID="Post1" class="post">
+                    <h2 class="post-title">
+                        Lorem 1 ipsum
+                    </h2>
+                    <div class="post-body-text">
+                        sdfasdfasdfsfasfwefeghrthrthtjtjzj
+                    </div>
+                </div>
+                <div ID="Post2" class="post">
+                    <h2 class="post-title">
+                        Lorem 2 ipsum
+                    </h2>
+                    <div class="post-body-text">
+                        sfasdfsafasfdsfsafsdfdfsadfasfsf
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>
