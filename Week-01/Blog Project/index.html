@@ -9,27 +9,32 @@
     <link rel = "stylesheet"  href = "style.css"  >
 </head>
 <script>
-    function postit()
-    {
-        var post = document.createElement("div");
-        post.class ="post";
-        var postTitle = document.createElement("h2");
-        postTitle.class ="post-title";
-        postTitle.appendChild(document.myform.title.value);
-        var postBodyText = document.createElement("div");
-        postBodyText.class ="post-body-text";
-        postBodyText.appendChild(document.myform.title.value);
-        post.appendChild(postTitle);
-        post.appendChild(postBodyText);
-        
-        document.body.appendChild(post);
-        document.getElementById("Post2").innerHTML ="EcPec";
+    function testit() {
+        // document.getElementById("Section2-title").className="post";
+        var jpost = document.createElement("div");
+        var jpostTitle = document.createElement("h2");
+        var jpostTitleText = document.createTextNode(document.myform.title.value)
+        var jpostBody = document.createElement("p");
+        var jpostBodyText = document.createTextNode(document.myform.content.value)
+
+        jpost.className ="post";
+        jpostTitle.className ="post-title-text";
+        jpostBody.className ="post-body-text";
+
+        jpostTitle.appendChild(jpostTitleText);
+        jpostBody.appendChild(jpostBodyText);
+
+        jpost.appendChild(jpostTitle);
+        jpost.appendChild(jpostBody);
+
+        document.getElementById("PostsBody").appendChild(jpost);
+        document.myform.reset();
     }
 </script>
 <body>
     <nav  class="nav-bar">
       <div  class="nav-middle align-main">
-          <div  class="nav-picture">
+          <div  class="">
             <span ID="Blogtitle"><H1>Buk-O-Blog</H1></span>
           </div>
       </div>
@@ -38,52 +43,51 @@
     <div ID="Content" class="align-main">
         <!-- Add NEW section -->
         <div ID="NewPost" class="">
-            <div ID="Section1-title" class="">
-                <h3>Add new post</h3> 
-            </div>
-            <form name="myform" action="">
+            <h3 ID="Section1-title" class="section-title">
+                Add new post
+            </h3> 
+            <form name="myform" onsubmit="testit(); return false">
                 <div ID="Input-title" class="">
                     <label for="title" ID="Input-title-label" class="">
                         Title
                     </label><br>
                     <input type="text" id="Input-title-field" name="title" 
-                    class="post-title-text">
+                    class="post-title-text" value = "Post title" onclick="this.value='' "> 
                 </div>
                 <div ID="Input-content" class="">
                     <label for="content" ID="Input-content-label" class="">
                         Content
                     </label>
                     <textarea type="text" id="Input-content-field" name="content" rows="5"
-                    class="post-body-text">
-                    </textarea>
+                    class="post-body-text"></textarea>
                 </div>
-                <input ID="Btn-submit" type="submit" value="Submit" onclick="postit(); return false">
-                <div  class="">
-                    
+                <input ID="Btn-submit" type="submit" value="Submit" >
+                <div  class="">  
+                   <hr> 
                 </div>
             </form>
         </div>
         <!-- History section -->
         <div ID="PostHistory" class="">
-            <div ID="Section2-title" class="">
-                <h3>Posts</h3> 
-            </div>
+            <h3 ID="Section2-title" class="section-title">
+                Posts
+            </h3> 
             <div ID="PostsBody" class="">
                 <div ID="Post1" class="post">
-                    <h2 class="post-title">
+                    <h2 class="post-title-text">
                         Lorem 1 ipsum
                     </h2>
-                    <div class="post-body-text">
+                    <p class="post-body-text">
                         sdfasdfasdfsfasfwefeghrthrthtjtjzj
-                    </div>
+                    </p>
                 </div>
                 <div ID="Post2" class="post">
-                    <h2 class="post-title">
+                    <h2 class="post-title-text">
                         Lorem 2 ipsum
                     </h2>
-                    <div class="post-body-text">
+                    <p ID="Post2p" class="post-body-text">
                         sfasdfsafasfdsfsafsdfdfsadfasfsf
-                    </div>
+                    </p>
                 </div>
 
             </div>
