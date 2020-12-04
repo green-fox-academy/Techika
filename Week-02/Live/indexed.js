@@ -15,6 +15,6 @@ console.log(y);
 console.log(w);
 */
 
-var favoriteNumber = 5^3;
-var fullname = `Hello, my name is ${favoriteNumber}`;
+var favorite = 5^3;
+var fullname = `Hello, my name is ${favorite}`;
 console.log(fullname);  

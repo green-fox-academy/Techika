@@ -23,7 +23,7 @@ let colorName: string = triColor[4];
 // Displays 'Green'
 console.log(colorName);
 -------
-*/
+
 
   let y:Number = 5;
   let x:number = 2**3;
@@ -33,3 +33,5 @@ y **= w;
   console.log(x);
   console.log(y);
   console.log(w);
+ -------
+ */
