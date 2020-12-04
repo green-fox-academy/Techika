@@ -27,5 +27,9 @@ console.log(colorName);
 
   let y:Number = 5;
   let x:number = 2**3;
+  let w:number = 2;
+y **= w;
+
   console.log(x);
   console.log(y);
+  console.log(w);
