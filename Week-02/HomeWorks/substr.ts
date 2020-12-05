@@ -7,12 +7,11 @@
 //  Returns `-1` if the second string is not in the first one
 
 function substr(str: string, keyword: string): number {
-  let nth: number;
-  if ((nth = str.indexOf(keyword))) {
-    // I think this nth assignment is risky, but elegant...
-    return nth;
+  let nth: number = str.indexOf(keyword);
+  if (nth === -1) {
+    return -1;
   }
-  return -1;
+  return nth;
 }
 
 //  Example

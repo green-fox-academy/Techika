@@ -10,7 +10,7 @@
 //
 // Print the percentage of the coding hours in the semester if the average
 // work hours weekly is 52
-const daily = 6;
+const daily: number = 6;
 const weekly = daily * 5;
 const semesterWeek = 17;
 const semesterDay = 5 * semesterWeek;
