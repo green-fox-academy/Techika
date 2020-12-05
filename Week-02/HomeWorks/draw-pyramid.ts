@@ -33,6 +33,5 @@ function pyramid(
     );
   }
 }
+// Console:
 pyramid(7, "%", " ", 30);
-/*
-minden sorban +2*  , minden sorban max karakter: 2*lines)-1 */

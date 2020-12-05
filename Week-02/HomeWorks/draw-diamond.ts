@@ -2,9 +2,6 @@
 /* eslint-disable no-console */
 /* eslint-disable linebreak-style */
 
-const lineCount = 7;
-const offset = 2;
-const char = "*";
 // Write a program that draws a
 // diamond like this:
 //
@@ -46,4 +43,5 @@ function repeat(string, times) {
   return repeatedString;
 }
 
+//Console:
 diamondraw(11, "*", "-", 30);
