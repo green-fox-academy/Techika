@@ -38,7 +38,7 @@ function diamondraw(
 }
 
 function repeat(string, times) {
-  let repeatedString = "";
+  let repeatedString: string = "";
   while (times > 0) {
     repeatedString += string;
     times--;
