@@ -33,9 +33,10 @@ function repeat(inString: string, times: number) {
   let repeatedString: string = "";
   while (times > 0) {
     repeatedString += inString;
-    times--;
+    times -= 1;
   }
   return repeatedString;
 }
 
+//Console
 squaredraw(11, "%", " ", 30);

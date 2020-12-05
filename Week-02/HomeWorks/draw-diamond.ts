@@ -34,11 +34,11 @@ function diamondraw(
   }
 }
 
-function repeat(string, times) {
+function repeat(inString: string, times: number) {
   let repeatedString: string = "";
   while (times > 0) {
-    repeatedString += string;
-    times--;
+    repeatedString += inString;
+    times -= 1;
   }
   return repeatedString;
 }

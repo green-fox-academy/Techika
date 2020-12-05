@@ -23,7 +23,7 @@ function squaredraw(
       console.log(
         repeat(" ", margin) +
           pencil +
-          leveler(line - 1, lines - 2, pencil, paper) +
+          leveler(line - 1, lines - 2, "\\\\ ", paper) +
           pencil
       );
     }
@@ -51,10 +51,10 @@ function repeat(inString: string, times: number) {
   let repeatedString: string = "";
   while (times > 0) {
     repeatedString += inString;
-    times--;
+    times -= 1;
   }
   return repeatedString;
 }
 
 //Console:
-squaredraw(20, "%", " ", 5);
+squaredraw(15, "[o]", " . ", 5);
