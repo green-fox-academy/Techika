@@ -18,10 +18,10 @@ drawing lines between them.. will be an interesting solution...
 function Piramid(
   canvas:HTMLCanvasElement,
   ctx:CanvasRenderingContext2D,
-  pA:[number,number]=[canvas.width/2,0],
-  pB:[number,number]=[canvas.width,canvas.height],
-  pC:[number,number]=[0,canvas.height],
-  lineRatio:number=21,
+  pA:[number,number]=[canvas.width/2,50],
+  pB:[number,number]=[canvas.width-50,canvas.height-50],
+  pC:[number,number]=[50,canvas.height-50],
+  lineRatio:number=10, /*exact for excercise:21*/
   ){
     ctx.moveTo(...pA);
     ctx.beginPath;
@@ -29,7 +29,7 @@ function Piramid(
     ctx.lineTo(...pC);
     ctx.closePath();
     ctx.stroke();
-    for (let lines=1; lines<=lineRatio ; lines++){
+    for (let lines=1; lines<lineRatio ; lines++){
       let odaX0:number=pA[0] - ((pA[0]-pC[0]) / lineRatio)*lines;
       let odaY0:number=pA[1] + ((pC[1]-pA[1]) / lineRatio)*lines;
       let odaX1:number=pA[0] + ((pB[0]-pA[0]) / lineRatio)*lines;
@@ -40,6 +40,7 @@ function Piramid(
       let odaY3:number=pB[1] - ((pB[1]-pA[1]) / lineRatio)*lines;//(lineRatio-lines);
       //console.log(odaX0,odaY0,odaX1,odaY1);
       ctx.moveTo(odaX1,odaY1);
+      ctx.beginPath;
       ctx.lineTo(odaX0,odaY0);
       ctx.lineTo(odaX2,odaY2);
       ctx.lineTo(odaX3,odaY3);
