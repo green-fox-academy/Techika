@@ -15,14 +15,14 @@ I need 3 coordinates for the 3 corners and one line ratio
 drawing lines between them.. will be an interesting solution...
 
 */
-function Piramid(
+function drawPiramid(
   canvas:HTMLCanvasElement,
   ctx:CanvasRenderingContext2D,
   pA:[number,number]=[canvas.width/2,50],
   pB:[number,number]=[canvas.width-50,canvas.height-50],
   pC:[number,number]=[50,canvas.height-50],
-  lineRatio:number=10, /*exact for excercise:21*/
-  ){
+  lineRatio:number=21, /*exact for excercise:21*/
+  ):void{
     ctx.moveTo(...pA);
     ctx.beginPath;
     ctx.lineTo(...pB);
