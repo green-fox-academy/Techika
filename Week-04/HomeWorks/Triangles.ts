@@ -48,4 +48,4 @@ function drawPiramid(
     } 
 }
 
-Piramid(canvas,ctx);
+drawPiramid(canvas,ctx);
