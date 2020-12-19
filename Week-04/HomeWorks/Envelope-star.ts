@@ -10,7 +10,7 @@ export {};
 /*
 I need: height, midpoint, resolution
 */
-drawEnvelopeStar(canvas,ctx);
+drawEnvelopeStar();
 
 function drawEnvelopeStar (
   canvas:HTMLCanvasElement = document.querySelector('.main-canvas') as HTMLCanvasElement,
@@ -28,15 +28,6 @@ function drawEnvelopeStar (
     ctx.lineTo(o[0]-sH*i,o[1]);
     ctx.lineTo(o[0],o[1]+h-i);
     ctx.lineTo(o[0]+sH*i,o[1]);
-    ctx.closePath();
-    ctx.stroke();
-  }
-  for (let i:number=10; i< h/sV; i+=rV){
-    ctx.beginPath();
-    ctx.moveTo(o[0]-h+i,o[1]);
-    ctx.lineTo(o[0],o[1]-sV*i);
-    ctx.lineTo(o[0]+h-i,o[1]);
-    ctx.lineTo(o[0],o[1]+sV*i);
     ctx.closePath();
     ctx.stroke();
   }

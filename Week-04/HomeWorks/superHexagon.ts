@@ -16,12 +16,13 @@ OR lets strat fron middle, and make symmetric circles.
 **Dzoval ebben a megkozelitesben koncentrikusan probalkoztam... de most kicsit feladom, mert sok issue van vele.
 
 */
+drawHexagon();
+
 function drawHexagon(
-  canvas:HTMLCanvasElement,
-  ctx:CanvasRenderingContext2D,
+  ctx:CanvasRenderingContext2D=canvas.getContext('2d'),
   cP:[number,number]=[150,100],
-  radius:number=20,
-  hexPerSide:number=4,
+  radius:number=15,
+  hexPerSide:number=5,
   ):void{
     for (let l=0; l<(hexPerSide*2-1); l++){
       let cC:number[]=cP.slice();
@@ -34,7 +35,7 @@ function drawHexagon(
         cC[1] + radius * Math.sin(0) // 0
         );
         ctx.beginPath(); 
-        for (let side=0; side < 7; side++) {
+        for (let side=0; side <= 6; side++) {
           ctx.lineTo(
             cC[0]  + radius * Math.cos(side * 2 * Math.PI / 6), 
             cC[1]  + radius * Math.sin(side * 2 * Math.PI / 6)
@@ -45,4 +46,3 @@ function drawHexagon(
   }
 }
 
-drawHexagon(canvas,ctx);

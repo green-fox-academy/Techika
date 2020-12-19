@@ -30,20 +30,25 @@ function drawPiramid(
     ctx.closePath();
     ctx.stroke();
     for (let lines=1; lines<lineRatio ; lines++){
+      //Creating coordinates for the waypoints
       let odaX0:number=pA[0] - ((pA[0]-pC[0]) / lineRatio)*lines;
       let odaY0:number=pA[1] + ((pC[1]-pA[1]) / lineRatio)*lines;
       let odaX1:number=pA[0] + ((pB[0]-pA[0]) / lineRatio)*lines;
       let odaY1:number=pA[1] + ((pB[1]-pA[1]) / lineRatio)*lines;
       let odaX2:number=pC[0] + ((pB[0]-pC[0]) / lineRatio)*(lineRatio-lines);
       let odaY2:number=pC[1] + ((pB[1]-pC[1]) / lineRatio)*(lineRatio-lines);
-      let odaX3:number=pB[0] - ((pB[0]-pA[0]) / lineRatio)*lines;//(lineRatio-lines);
-      let odaY3:number=pB[1] - ((pB[1]-pA[1]) / lineRatio)*lines;//(lineRatio-lines);
-      //console.log(odaX0,odaY0,odaX1,odaY1);
-      ctx.moveTo(odaX1,odaY1);
+      let odaX3:number=pB[0] - ((pB[0]-pA[0]) / lineRatio)*lines;
+      let odaY3:number=pB[1] - ((pB[1]-pA[1]) / lineRatio)*lines;
+      //Drawing the interior crossections
       ctx.beginPath;
+      ctx.moveTo(odaX1,odaY1);
       ctx.lineTo(odaX0,odaY0);
       ctx.lineTo(odaX2,odaY2);
       ctx.lineTo(odaX3,odaY3);
+      if (lines===1) ctx.strokeStyle="red";
+      if (lines!==1) ctx.strokeStyle="black";
+      //else ctx.strokeStyle="black";
+      //ctx.strokeStyle = (lines===1 ? "red" : "black");
       ctx.stroke();
     } 
 }

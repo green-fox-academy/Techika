@@ -17,7 +17,7 @@ drawLinePlay();
 function drawLinePlay (
   canvas:HTMLCanvasElement = document.querySelector('.main-canvas') as HTMLCanvasElement,
   ctx:CanvasRenderingContext2D = canvas.getContext('2d'),
-  padding:number=3,
+  padding:number=10,
   cUo:[number,number]=[canvas.width-padding,padding], //Coordinate of upper start
   cUx:[number,number]=[canvas.width*0.15,padding], //Coordinate of upper left bound
   cUy:[number,number]=[canvas.width-padding,canvas.height*0.95], //Coordinate of upper right bound
