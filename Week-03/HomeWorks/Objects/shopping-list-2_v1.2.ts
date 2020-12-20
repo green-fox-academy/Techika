@@ -61,10 +61,8 @@ function massCompare (shoppingLists:any={},contenders:string[],contestItem:strin
           Object.values(contest));
         })
     );
+    
 }
-// to continue , work with:
-// const found = arr1.some(r=> arr2.includes(r))
-
 // How much does Bob pay?
 howMuch(products,Shopping,'Bob');
 // How much does Alice pay?
@@ -72,7 +70,5 @@ howMuch(products,Shopping,'Alice');
 // Who buys more Rice?
 massCompare(Shopping,['Bob','Alice','Mark'],'Rice');
 // Who buys more Potato?
-massCompare(Shopping,['Bob','Alice','Mark'],'Potato');
 // Who buys more different products?
-
 // Who buys more products? (piece)
