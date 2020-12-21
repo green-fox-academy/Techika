@@ -22,12 +22,12 @@ function drawLinePlay (
   cUx:[number,number]=[canvas.width*0.15,padding], //Coordinate of upper left bound
   cUy:[number,number]=[canvas.width-padding,canvas.height*0.95], //Coordinate of upper right bound
   cLo:[number,number]=[padding , canvas.height-padding], //Coordinate of upper start
-  cLx:[number,number]=[canvas.width*0.95,padding], //Coordinate of upper left bound
-  cLy:[number,number]=[padding,canvas.height*0.15], //Coordinate of upper right bound
+  cLx:[number,number]=[canvas.width*0.95,canvas.height-padding], //Coordinate of lower left bound
+  cLy:[number,number]=[padding,canvas.height*0.15], //Coordinate of lower right bound
   steps:number=20,
   rUh:number=(cUo[0]-cUx[0])/steps, // resolution upper Horizontal
   rUv:number=(cUy[1]-cUo[1])/steps, // rH, // resolution upper Vertical
-  rLh:number=(cLo[0]+cLx[0])/steps, // resolution lower Horizontal
+  rLh:number=(cLx[0]-cLo[0])/steps, // resolution lower Horizontal
   rLv:number=(cLo[1]-cLy[1])/steps, // rH, // resolution lower Vertical
 ):void{
   // upper right corner
