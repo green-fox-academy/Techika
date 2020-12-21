@@ -20,6 +20,23 @@ You can stil define: Target canvas, Canvas engine, Side Padding, Corner Padding,
 
 drawLinePlay({canvasXdivisions:2,steps:50});
 
+/**
+ * 
+ * @param SidePadding : 
+ * Number of pixels should be left blank on the sides of the canvas blocks.
+ * @param upperLeftCornerPaddingRatio :
+ *  Defining a % of where the drawing should start from in the upper left corner.
+ * @param lowerRightCornerPaddingRatio : 
+ * Defining a % of where the drawing should end in the lower right corner.
+ * @param canvasXdivisions : 
+ * How many sudivisions should the Canves have on the X axis (and the Y axis, if only X provided).
+ * @param canvasYdivisions : 
+ * How many sudivisions should the Canves have on the Y axis
+ * @param steps : 
+ * How many lines should compose one instance of the drawing.
+ * @param debugMode : 
+ * Turning console logs on or off. (default off).
+ */
 function drawLinePlay 
 ({ // Default parameter settings
   canvas = document.querySelector('.main-canvas') as HTMLCanvasElement,
