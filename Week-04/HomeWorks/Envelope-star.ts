@@ -10,17 +10,36 @@ export {};
 /*
 I need: height, midpoint, resolution
 */
-drawEnvelopeStar();
-
+drawEnvelopeStar()
+/**
+ * 
+ * @param canvas :Passing the HTML canvas element (default'.main-canvas')
+ * @param ctx :passing the rendering engine (default: '2d')
+ * @param o :Origo coordinates (default: canvas midpoint )
+ * @param h :Height (defaul: 200)
+ * @param sH :Slope Horizontal (default: 1)
+ * @param sV :Slope vertica (default: = sH)
+ * @param rH :Resolution Horizontal (default: 10)
+ * @param rV :Resolution Vertical (default: =rH)
+ */
 function drawEnvelopeStar (
-  canvas:HTMLCanvasElement = document.querySelector('.main-canvas') as HTMLCanvasElement,
-  ctx:CanvasRenderingContext2D = canvas.getContext('2d'),
-  o:[number,number]=[canvas.width/2,canvas.height/2], //Origo
-  h:number=200, //height
-  sH:number=1, // slope Horizontal
-  sV:number=sH, // slope Vertical
-  rH:number=10, // resolution Horizontal
-  rV:number=rH, // resolution Vertical
+{ canvas = document.querySelector('.main-canvas') as HTMLCanvasElement
+  , ctx = canvas.getContext('2d')
+  , o = [canvas.width / 2, canvas.height / 2]
+  , h = 200
+  , sH = 1
+  , sV = sH
+  , rH = 10
+  , rV = rH
+}: { canvas?: HTMLCanvasElement
+  ; ctx?: CanvasRenderingContext2D
+  ; o?: [number, number]
+  ; h?: number
+  ; sH?: number
+  ; sV?: number
+  ; rH?: number
+  ; rV?: number
+  ; } = {}
 ):void{
   for (let i:number=0; i< h/sH; i+=rH){
     ctx.beginPath();
