@@ -1,0 +1,132 @@
+/*-------------------------------*/  
+/* TEXT DEFAULTS*/
+/*-------------------------------*/  
+html {font-size: 16px; }
+body {    margin: 0px;  background-image: url("topography.png"); }
+h1 {      margin:0;   padding: 0; align-self: center;
+    font-size: 1.8rem; text-align: center; height:50; font-family: Copperplate, Papyrus, fantasy; /* font-family: Georgia, serif;*/
+    display: flex; align-items: center; /*text-decoration: underline;*/}
+h2 {      margin:0;   padding: 0;   font-size: 1.3rem; font-weight:500; }
+/* h3 {        margin:0;   padding: 0;} */
+h3 {  font-weight:normal;  }
+/* #Content {  margin-top: 100px;    margin-bottom: 50px;} */
+label { font-size:0.9rem; font-weight:bold;}
+textarea {    resize: none;  }
+p {margin:0; padding:0;}
+
+#Blogtitle {
+
+    text-align: center;
+    color: rgb(173, 152, 32);
+    text-shadow: gold;
+    font-size: larger ;
+    height:50;
+    display:flex;
+    /* justify-content: space-between; */
+    flex-direction: column;
+}
+.section-title{
+    font-size:1.4rem;
+}
+
+.post-title-text{
+    font-size:1.1rem;
+    font-weight:900;
+    font-family:"Courier New" ;
+}
+.post-body-text{
+    font-size:1.1rem;
+    font-family:"Courier" ;
+}
+
+/* All things Gold */
+.nav-buttons li a{
+    /* color: #ff0099; */
+    color: rgb(173, 152, 32);
+}
+.nav-buttons li a:hover {
+    /* background-color: rgb(173, 152, 32); */
+    color: gold;
+}
+/*-------------------------------*/  
+/* BASICS*/
+/*-------------------------------*/  
+
+/* .nav-bar{
+    background-color: rgb(83, 81, 81);
+    padding: 10px 0px;
+    margin:0px 0px 20px 0px;
+} */
+.nav-bar{
+    background-color: #333333;
+    margin:0px 0px 75px 0px;
+    padding:10px;
+}
+.nav-middle{
+    display:flex;
+    justify-content: center;
+    /* justify-content: space-between; */
+}
+.myCanvas{ 
+    /* max-width:10%; */
+    /*margin:0;*/
+    /* display:flex; */
+    /* align-content: center; */
+    /* justify-content: space-between; */
+}
+.nav-buttons{
+    max-width:80%;
+}
+    .nav-buttons li{
+        display:inline;
+        list-style: none;
+        padding: 1px 16px;
+        margin: 0px;
+        font-weight: 530;
+        text-decoration: underline;
+        /* width:340px; */
+    }
+
+
+.align-main{
+    padding-right:15%;
+    padding-left:15%;
+}
+
+/*-------------------------------*/  
+/* New post*/
+/*-------------------------------*/  
+#Input-title{
+    margin-bottom:10px
+}
+#Input-content{
+    margin-bottom:8px
+}
+
+#Input-content-field{
+    width: 100%; 
+    /* height: 125px; */
+    border-radius: 2px;
+    border-width: 1px;
+}
+#Btn-submit{
+    padding-left:20px;
+    padding-right:20px;
+    font-size:0.8rem;
+    font-weight:450;
+    border-radius: 3px;
+    border-width: 2px;
+}
+
+/*-------------------------------*/  
+/* Old posts*/
+/*-------------------------------*/  
+
+.post{
+    border: 1px solid;
+    padding: 1px 2px;
+    margin-bottom: 10px;
+    background-color: rgb(190, 179, 117);
+    overflow: wrap;
+    word-break: break-all;
+}
