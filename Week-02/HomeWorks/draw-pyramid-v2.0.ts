@@ -1,5 +1,7 @@
 // --SETTINGS:--
-let pHeight:number = 5, pencil:string = "*", paper:string =" ";
+const pHeight:number = 5;
+const pencil:string = "*";
+const paper:string =" ";
 // --CORE:--
 let lineText:string="",  finalWidth:number=(2*pHeight-1);
 for (let pLevel:number=1; pLevel <= pHeight; pLevel += 1){

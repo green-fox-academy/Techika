@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Buk-o-Blog</title>
+    <!-- <link rel = "icon"        href = "assets/aperture.svg"         type = "image/x-icon"  >  -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <script>
+    function testit() {
+      // document.getElementById("Section2-title").className="post";
+      var jpost = document.createElement("div");
+      var jpostTitle = document.createElement("h2");
+      var jpostTitleText = document.createTextNode(document.myform.title.value);
+      var jpostBody = document.createElement("p");
+      var jpostBodyText = document.createTextNode(document.myform.content.value);
+
+      jpost.className = "post";
+      jpostTitle.className = "post-title-text";
+      jpostBody.className = "post-body-text";
+
+      jpostTitle.appendChild(jpostTitleText);
+      jpostBody.appendChild(jpostBodyText);
+
+      jpost.appendChild(jpostTitle);
+      jpost.appendChild(jpostBody);
+
+      document.getElementById("PostsBody").appendChild(jpost);
+      document.myform.reset();
+    }
+  </script>
+  <body>
+    <script type="text/typescript" src="bodyScripts/bukOclock.js"></script>
+    <script>
+      let exports = {};
+    </script>
+    <script src="https://rawgit.com/Microsoft/TypeScript/master/lib/typescriptServices.js"></script>
+    <script src="https://rawgit.com/basarat/typescript-script/master/transpiler.js"></script>
+    <nav class="nav-bar">
+      <!-- <H1>Buk<canvas width="50" height="50" class="myCanvas"></canvas>bloG</H1> -->
+      <div class="nav-middle align-main">
+        <div id="Blogtitle">
+          <h1>--_Buk<canvas width="50" height="50" class="myCanvas"></canvas>bloG_--</h1>
+          <!-- <div class='mid-left'>"   "</div> -->
+
+          <ul class="nav-buttons">
+            <li><a href="#Home">HOME</a></li>
+            <li><a href="#Wiki">WIKI</a></li>
+            <li>
+              <a href="https://github.com/Techika?tab=repositories" target="_blank">GITHUB</a>
+            </li>
+            <li>
+              <a href="https://www.linkedin.com/in/adam-bukovinszki-30bab2b/" target="_blank">LinkedIN</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- <ul  class="nav-buttons ">
+          <li><a href="#Home">HOME</a></li>
+          <li><a href="#Wiki">WIKI</a></li>
+          <li><a href="https://github.com/Techika?tab=repositories" target="_blank">GITHUB</a></li>
+          <li><a href="https://www.linkedin.com/in/adam-bukovinszki-30bab2b/" target="_blank">LinkedIN</a></li>   
+        </ul> -->
+    </nav>
+
+    <div id="Content" class="align-main">
+      <!-- Add NEW section -->
+      <div>This will be the canvas...</div>
+      <div id="NewPost" class="">
+        <h3 id="Section1-title" class="section-title">Add new comment</h3>
+        <form name="myform" onsubmit="testit(); return false">
+          <div id="Input-title" class="">
+            <label for="title" id="Input-title-label" class=""> Title </label><br />
+            <input
+              type="text"
+              id="Input-title-field"
+              name="title"
+              class="post-title-text"
+              value="Comment title"
+              onclick="this.value='' "
+            />
+          </div>
+          <div id="Input-content" class="">
+            <label for="content" id="Input-content-label" class=""> Content </label>
+            <textarea type="text" id="Input-content-field" name="content" rows="5" class="post-body-text"></textarea>
+          </div>
+          <input id="Btn-submit" type="submit" value="Submit" />
+          <div class="">
+            <hr />
+          </div>
+        </form>
+      </div>
+      <!-- History section -->
+      <div id="PostHistory" class="">
+        <h3 id="Section2-title" class="section-title">Comments</h3>
+        <div id="PostsBody" class="">
+          <div id="Post1" class="post">
+            <h2 class="post-title-text">Lorem 1 ipsum</h2>
+            <p class="post-body-text">sdfasdfasdfsfasfwefeghrthrthtjtjzj</p>
+          </div>
+          <div id="Post2" class="post">
+            <h2 class="post-title-text">Lorem 2 ipsum</h2>
+            <p id="Post2p" class="post-body-text">sfasdfsafasfdsfsafsdfdfsadfasfsf</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
