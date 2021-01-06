@@ -12,6 +12,7 @@ function deDoubler(inputPath: string): string {
       .filter((char, index, arr) => {
         if (index === arr.length - 1) return false;
         else if (char !== arr[index + 1]) return true;
+        else if (char === arr[index + 1] && char === arr[index + 3]) return true;
         else return false;
       })
       .join(``);
