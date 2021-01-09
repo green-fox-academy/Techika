@@ -69,73 +69,17 @@ function rememberThePlate(id: string): string[] {
   ];
 
   // describe basic facts about the ID, to make the search easier:
-  const idTypes: string[] = idArr.map((letter) => (vowels.includes(letter) ? 'vel' : 'consonant'));
+  const idTypes: string[] = idArr.map((letter) =>
+    vowels.includes(letter) ? 'vowel' : 'consonant'
+  );
   // if the licence plate starts with a vowel, the word also has to start with the same vowel
-  if (idTypes[0] === 'vowel') {
-    output = words.filter((word) => word.split('')[0] === idArr[0]);
-    // after vowels if the next letter on the licence plate is a consonant then this consonant should come as next,
-    // if the next letter on the licence plate is a vowel other consonants can come between them
-    if (consonants.includes(idArr[1])) {
-      output = output.filter((word) => word.split('')[1] === idArr[1]);
-    } else {
-      output = output.filter((word) => {
-        let truth: boolean = false;
-        let alreadyFound: boolean = false;
-        word.split('').forEach((letter, index) => {
-          if (index >= 1 && vowels.includes(letter)) {
-            if (!alreadyFound) {
-              truth = letter === idArr[1];
-              alreadyFound = true;
-            }
-          }
-        });
-        return truth;
-      });
-    }
-  }
+  output = words.filter((word) => word.match(/[euioay]l.*mo/g));
 
-  // if it starts with a consonant, it can start with any vowel but after the vowel(s) this consonant should come
-  else if (idTypes[0] === 'consonant') {
-    output = words.filter((word) => {
-      let truth: boolean = false;
-      let alreadyFound: boolean = false;
-      word.split('').forEach((letter) => {
-        if (consonants.includes(letter)) {
-          if (!alreadyFound) {
-            truth = letter === idArr[0];
-            alreadyFound = true;
-          }
-        }
-      });
-      return truth;
-    });
-    // after consonants if the next letter on the licence plate is a consonant then any vowel(s) can come between them
-    // but if the next character in the licence plate is a vowel then no other letter can come between them
-    //console.log(output);
-    if (vowels.includes(idArr[1])) {
-      output = output.filter((word) => word.split('')[1] === idArr[1]);
-    } else {
-      output = output.filter((word) => {
-        let truth: boolean = false;
-        let alreadyFound: boolean = false;
-        word.split('').forEach((letter, index) => {
-          if (index >= 1 && consonants.includes(letter)) {
-            if (!alreadyFound) {
-              truth = letter === idArr[1];
-              alreadyFound = true;
-            }
-          }
-        });
-        return truth;
-      });
-    }
-  }
   console.log(output);
-
-  // const plate:{}={
-  //   firstLetterIS: vowels.includes(idArr[0]) ? 'vowel' : 'consonant'
-  // }
 }
+// const plate:{}={
+//   firstLetterIS: vowels.includes(idArr[0]) ? 'vowel' : 'consonant'
+// }
 
 // rememberThePlate('usddr');
 rememberThePlate('lmo');
