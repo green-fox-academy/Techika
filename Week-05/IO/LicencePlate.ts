@@ -4,44 +4,40 @@
 //input: 2-5 string
 
 // Checklist:
-// ✓ the licence plate can contain a 2-5 letter long string and no numeric values, only alphabetical
-// if the licence plate starts with a vowel, the word also has to start with the same vowel
-// if it starts with a consonant, it can start with any vowel but after the vowel(s) this consonant should come
-// after vowels if the next letter on the licence plate is a consonant then this consonant should come as next,
-// if the next letter on the licence plate is a vowel other consonants can come between them
-// after consonants if the next letter on the licence plate is a consonant then any vowel(s) can come between them
-// but if the next character in the licence plate is a vowel then no other letter can come between them
-
-// ✓ to ask the user for input
 // ✓ validate the input
-// parse and search through the terms in the file
-// use exception handling for both validating the input and reading the file
-// return a list of possible words or display some meaningful message if there is no such word
+// ✓ parse and search through the terms in the file
+// ✓ use exception handling for both validating the input and reading the file
+// ✓ return a list of possible words or display some meaningful message if there is no such word
 
 //split text both by line and by TAB to get the array
 // create an array of vowels and an array of consonants to check against.
 
 export {};
-//declare function require(name: string): any;
 
 // const readline = require('readline'); In case we truly aim for asking the ID on the spot and not predefined...
 
 function rememberThePlate(id: string): string[] {
   const fs = require('fs');
+  //check if the dictionary fiel exists
+  try {
+    if (!fs.existsSync('fileDepo/words.txt')) throw 'error';
+  } catch (error) {
+    // console.log('Sorry, the dictionary file is not found, please create: fileDepo/words.txt');
+    return;
+  }
+  console.log('Reminders found for plate ID: ' + id);
+
   //validate the input (string of 2-5 characters, but no numbers in it)
   if (!(id.length <= 5 && id.length >= 2 && !id.match(/\d/g))) {
-    console.log('Naah');
+    console.log(
+      'Sorry, the PlateID needs to be 2-5 characters long, using only basic lowcap english alphabet letters'
+    );
     return;
-  } // !! Here I should make an extra care for basic english letters only!
+  } // !! Here I could make an extra care for basic english letters only!
+
   //store the ID in an array instead:
   const idArr: string[] = id.split('');
-  //create the list of word array, by splitting the text both by line and by tab.
-  const words: string[] = fs
-    .readFileSync('fileDepo/words.txt', 'utf-8')
-    .split('\r\n')
-    .join('\t')
-    .split('\t');
-  let output: string[] = [];
+
   //create an array of vowels and an array of consonants
   const vowels: string[] = ['e', 'u', 'i', 'o', 'a', 'y'];
   const consonants: string[] = [
@@ -68,95 +64,54 @@ function rememberThePlate(id: string): string[] {
     'y',
   ];
 
-  // describe basic facts about the ID, to make the search easier:
-  const idTypes: string[] = idArr.map((letter) => (vowels.includes(letter) ? 'vel' : 'consonant'));
-  // if the licence plate starts with a vowel, the word also has to start with the same vowel
-  if (idTypes[0] === 'vowel') {
-    output = words.filter((word) => word.split('')[0] === idArr[0]);
-    // after vowels if the next letter on the licence plate is a consonant then this consonant should come as next,
-    // if the next letter on the licence plate is a vowel other consonants can come between them
-    if (consonants.includes(idArr[1])) {
-      output = output.filter((word) => word.split('')[1] === idArr[1]);
-    } else {
-      output = output.filter((word) => {
-        let truth: boolean = false;
-        let alreadyFound: boolean = false;
-        word.split('').forEach((letter, index) => {
-          if (index >= 1 && vowels.includes(letter)) {
-            if (!alreadyFound) {
-              truth = letter === idArr[1];
-              alreadyFound = true;
-            }
-          }
-        });
-        return truth;
-      });
-    }
-  }
+  // check the type of letters in the plate text and store for reference
+  const idTypes: string[] = idArr.map((letter) =>
+    vowels.includes(letter) ? 'vowel' : 'consonant'
+  );
 
-  // if it starts with a consonant, it can start with any vowel but after the vowel(s) this consonant should come
-  else if (idTypes[0] === 'consonant') {
-    output = words.filter((word) => {
-      let truth: boolean = false;
-      let alreadyFound: boolean = false;
-      word.split('').forEach((letter) => {
-        if (consonants.includes(letter)) {
-          if (!alreadyFound) {
-            truth = letter === idArr[0];
-            alreadyFound = true;
-          }
-        }
-      });
-      return truth;
-    });
-    // after consonants if the next letter on the licence plate is a consonant then any vowel(s) can come between them
-    // but if the next character in the licence plate is a vowel then no other letter can come between them
-    //console.log(output);
-    if (vowels.includes(idArr[1])) {
-      output = output.filter((word) => word.split('')[1] === idArr[1]);
-    } else {
-      output = output.filter((word) => {
-        let truth: boolean = false;
-        let alreadyFound: boolean = false;
-        word.split('').forEach((letter, index) => {
-          if (index >= 1 && consonants.includes(letter)) {
-            if (!alreadyFound) {
-              truth = letter === idArr[1];
-              alreadyFound = true;
-            }
-          }
-        });
-        return truth;
-      });
-    }
-  }
-  console.log(output);
+  //Create a text variable to store the regex expression and apply the criteria on the expression step by step.
+  let regText: string = '';
+  idTypes.forEach((type, poz) => {
+    // determine first characters
+    if (poz === 0) {
+      // if the licence plate starts with a vowel, the word also has to start with the same vowel
+      if (type === 'vowel') regText += idArr[0];
+      // if it starts with a consonant, it can start with any vowel but after the vowel(s) this consonant should come
+      if (type === 'consonant') regText += '[euioay]?' + idArr[0];
 
-  // const plate:{}={
-  //   firstLetterIS: vowels.includes(idArr[0]) ? 'vowel' : 'consonant'
-  // }
+      //after vowels
+    } else if (idTypes[poz - 1] === 'vowel') {
+      // if the next letter on the licence plate is a consonant then this consonant should come as next
+      if (type === 'consonant') regText += idArr[poz];
+      // if the next letter on the licence plate is a vowel other consonants can come between them
+      if (type === 'vowel') regText += '[bcdfghjklmnpqrstvwxzy]*' + idArr[poz];
+
+      // after consonants
+    } else if (idTypes[poz - 1] === 'consonant') {
+      // if the next letter on the licence plate is a consonant then any vowel(s) can come between them
+      if (type === 'consonant') regText += '[euioay]*' + idArr[poz];
+      // if the next character in the licence plate is a vowel then no other letter can come between them
+      if (type === 'vowel') regText += idArr[poz];
+    }
+  });
+  // close regex pattern with "any"
+  regText += '.*';
+  // create regex search item from the text variable
+  const search: RegExp = new RegExp('\\b' + regText + '\\b', 'g');
+  // perform the search directly on the input file
+  const matches: string[] = fs
+    .readFileSync('fileDepo/words.txt', 'utf-8')
+    .replace(/\t/g, '\r\n')
+    .match(search);
+  // log out the search pattern and the results
+  console.log(search);
+  if (matches === null) return ['No matching words!'];
+  else return matches;
+  //console.log(matches);
 }
 
-// rememberThePlate('usddr');
-rememberThePlate('lmo');
-//rememberThePlate('rad');
-
-//   try {
-//     return fs
-//       .readFileSync(ID, 'utf-8')
-//       .split('\n')
-//       .map((line) => {
-//         return line.split('').reverse().join(``);
-//       })
-//       .join(`\n`);
-//   } catch (error) {
-//     return ['Sorry, no luck this time.'];
-//     //console.log('Sorry, no luck this time.');
-//   }
-// }
-
-// console.log(rememberThePlate('fileDepo/words.txt'));
-
-// const plateID = 'agave';
-
-// console.log(rememberThePlate(plateID));
+console.log(rememberThePlate('lmo'));
+console.log(rememberThePlate('rdo'));
+console.log(rememberThePlate('antl'));
+console.log(rememberThePlate('rdhko'));
+console.log(rememberThePlate('rdo2'));
