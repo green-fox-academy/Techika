@@ -1,4 +1,4 @@
-class Pirate {
+export class Pirate {
   private status: 'ready' | 'passed out' | 'dead' = 'ready'; // dead/passed out/ready
   private toxicity: number = 0;
 
@@ -6,17 +6,22 @@ class Pirate {
   // get status() {
   //   return this.status;
   // }
+
+  public get rumConsumed(): number {
+    return this.toxicity;
+  }
+
   statusCheck(specific?: 'ready' | 'passed out' | 'dead'): string | boolean {
     switch (this.status) {
       case 'dead':
-        console.log('He is dead');
+        //console.log('He is dead');
         if (specific !== undefined) {
           if (specific === 'dead') return true;
           else return false;
         }
         return this.status;
       case 'passed out':
-        console.log('/Snoring/');
+        //console.log('/Snoring/');
         if (specific !== undefined) {
           if (specific === 'passed out') return true;
           else return false;
@@ -35,14 +40,16 @@ class Pirate {
 
   drinkSomeRum(): void {
     //- intoxicates the Pirate some
-    if (this.statusCheck()) this.toxicity += 1;
+    if (this.statusCheck('ready')) this.toxicity += 1;
+    if (this.toxicity > 4) this.passOut();
   }
 
   howsItGoingMate(): void {
     if (this.statusCheck('ready')) {
-      if (this.toxicity <= 4) console.log('Pour me anudder!');
-      // 0 to 4 times, "Pour me anudder!"
-      else {
+      if (this.toxicity <= 4) {
+        console.log('Pour me anudder!');
+        this.toxicity += 1;
+      } else {
         console.log("Arghh, I'ma Pirate. How d'ya d'ink its goin?");
         this.status = 'passed out';
       }
@@ -78,13 +85,3 @@ class Pirate {
     }
   }
 }
-
-const sparrow: Pirate = new Pirate();
-const fonda: Pirate = new Pirate();
-
-console.log(fonda.statusCheck());
-//sparrow.passOut();
-fonda.brawl(sparrow);
-
-fonda.howsItGoingMate();
-sparrow.howsItGoingMate();
