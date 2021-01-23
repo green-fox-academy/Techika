@@ -1,5 +1,5 @@
 class Maths {
-  sum(integerList: number[]) {
+  sum(integerList: number[]): number {
     return integerList.reduce((previous, current) => previous + current, 0);
   }
 }
