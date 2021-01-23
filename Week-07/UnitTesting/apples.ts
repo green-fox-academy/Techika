@@ -1,5 +1,5 @@
 class AppleType {
-  getApple() {
+  getApple(): string {
     return 'Apple';
   }
 }
