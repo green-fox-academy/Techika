@@ -5,7 +5,10 @@ class CowsAndBulls {
 
   constructor() {
     //[1, 2, 3, 4].forEach(() => this.guessMe.push(Math.floor(Math.random() * 9)));
-    console.log('I have thought of a 4 digit nuber, can you guess it?');
+    console.log(
+      'I have thought of a 4 digit positive whole number, can you guess it?\n' +
+        'For game instructions read the manual'
+    );
   }
 
   testGuess(guess: number[]): { cows: number; bulls: number } {
@@ -28,39 +31,57 @@ class CowsAndBulls {
     return { cows: cows, bulls: bulls };
   }
 
-  guess(guess: [number, number, number, number]): string {
+  inputValidation(guessText: string): [boolean, [number, number, number, number]] {
+    if (guessText.length === 4) {
+      const outArr: number[] = guessText.split('').reduce((out, char) => {
+        if (!isNaN(Number(char))) out.push(Number(char));
+        return out;
+      }, []);
+      if (outArr.length === 4) return [true, [outArr[0], outArr[1], outArr[2], outArr[3]]];
+    }
+    return [false, [null, null, null, null]];
+  }
+  guess(guess: string): string {
     if (this.gameState === 'finished')
       return 'Sorry, the game has already finished, clone a new one!';
+    const validated: [boolean, number[]] = this.inputValidation(guess);
+    if (!validated[0])
+      return `Your guess "${guess}" is invalid, please provide a 4 digit positive whole number as guess`;
     this.guessCount += 1;
-    const result = this.testGuess(guess);
+    const result = this.testGuess(validated[1]);
     if (result.cows === 4 && result.bulls === 0) {
       this.gameState = 'finished';
       return `Congratulations, you have guessed the correct answer in ${this.guessCount} steps!`;
     } else
-      return `Attempt: ${this.guessCount} | You hit ${result.cows} Cows and ${result.bulls} Bulls`;
+      return `Attempt: ${this.guessCount} | "${guess}" | You hit ${result.cows} Cows and ${result.bulls} Bulls`;
   }
 }
 
-const game1 = new CowsAndBulls();
-console.log(game1.guessMe);
-//console.log(game1.testGuess([1, 2, 3, 4]));
-console.log(game1.guess([22, 44, 55, 66]));
-//console.log(game1.guess([1, 2, 3]));
-//console.log(game1.guess([1, 2, 3, 9, 4]));
-//console.log(game1.guess([1, -2, 3, -4]));
-console.log(game1.guess([1, 2, 2, 4]));
-console.log(game1.guess([3, 6, 5, 8]));
-console.log(game1.guess([2, 3, 4, 1]));
-console.log(game1.guess([4, 5, 6, 3]));
+// const game1 = new CowsAndBulls();
+// console.log(game1.guessMe);
 
-// Need to test:
-// [ 4, 0, 7, 1 ]
-// You hit 0 Cows and 0 Bulls
+// console.log(game1.guess(''));
+// console.log(game1.guess('134'));
+// console.log(game1.guess('12B4'));
+// console.log(game1.guess('1.234'));
+// console.log(game1.guess('1-23-4'));
+// console.log(game1.guess('-1234'));
+// console.log(game1.guess('1234'));
+// console.log(game1.guess('3658'));
+// console.log(game1.guess('2341'));
+// console.log(game1.guess('4563'));
 
-// import test = require('tape');
+import test = require('tape');
 
-// test('AppleTester', (t) => {
-//   const a: AppleType = new AppleType();
-//   t.equal(a.getApple(), 'Apple');
-//   t.end();
-// });
+test('CowTester - inputs', (t) => {
+  const c: CowsAndBulls = new CowsAndBulls();
+  t.equal(
+    c.guess(''),
+    'Your guess "" is invalid, please provide a 4 digit positive whole number as guess'
+  );
+  t.equal(
+    c.guess('12B4'),
+    'Your guess "12B4" is invalid, please provide a 4 digit positive whole number as guess'
+  );
+  t.end();
+});
