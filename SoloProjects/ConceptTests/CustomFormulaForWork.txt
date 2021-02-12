@@ -1,0 +1,31 @@
+Original:
+If([Work Order | Details | MSP Code]="G1DH",
+  [Work Order | Custom Field | Assignment Type],
+  If([Work Order | Details | Work Order City Country/Region]="CHE",
+    [Work Order | Custom Field | CH Assignment Type],
+    If([Work Order | Details | Work Order City Country/Region]="FRA",
+      [Work Order | Custom Field | Source de la candidature],
+      [Work Order | Custom Field | Assignment Type]
+    )
+  )
+)
+--------
+
+If([Work Order | Details | MSP Code]="G1DH",
+  [Work Order | Custom Field | Assignment Type],
+  If([Work Order | Details | Work Order City Country/Region]="CHE",
+    [Work Order | Custom Field | CH Assignment Type],
+    If([Work Order | Details | Work Order City Country/Region]="FRA",
+      If([Work Order | Custom Field | Source de la candidature]="Délégation", "Tender",
+        If([Work Order | Custom Field | Source de la candidature]="Job été", "Payroll",
+          If([Work Order | Custom Field | Source de la candidature]="Demande fictive", "Fictitious request",
+            If([Work Order | Custom Field | Source de la candidature]="Cooptation/Gestion", "Payroll",
+              [Work Order | Custom Field | Source de la candidature] 
+            )
+          )
+        )
+      )
+      [Work Order | Custom Field | Assignment Type]
+    )
+  )
+)
