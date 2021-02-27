@@ -1,0 +1,38 @@
+{
+  "name": "Techika",
+  "version": "1.0.0",
+  "description": "---\r ```\r   .--.            .--.\r  ( (`\\\\.\"--``--\".//`) )\r   '-.   __   __    .-'\r    /   /__\\ /__\\   \\\r   |    \\ 0/ \\ 0/    |\r   \\     `/   \\`     /\r    `-.  /-\"\"\"-\\  .-`\r      /  '.___.'  \\\r      \\     I     /\r       `;--'`'--;`\r         '.___.'\r ```\r ---",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint . --ext .ts",
+    "tsc": "./node_modules/typescript/bin/tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/green-fox-academy/Techika.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/green-fox-academy/Techika/issues"
+  },
+  "homepage": "https://github.com/green-fox-academy/Techika#readme",
+  "devDependencies": {
+    "@types/node": "^14.14.20",
+    "@types/tape": "^4.13.0",
+    "@typescript-eslint/eslint-plugin": "^4.9.0",
+    "@typescript-eslint/parser": "^4.9.0",
+    "eslint": "^7.14.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-import-resolver-typescript": "^2.3.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-json": "^2.1.2",
+    "eslint-plugin-prettier": "^3.2.0",
+    "prettier": "^2.2.1",
+    "tape": "^5.1.1",
+    "typescript": "^4.1.2"
+  }
+}
