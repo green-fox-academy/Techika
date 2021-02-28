@@ -13,16 +13,16 @@
 
   <body>
     <!-- <script src="js/scripts.js"></script> -->
-    <script></script>
+    <script src="index.js"></script>
     <!-- <script type="module" src="index.js"></script> -->
     <!-- <div id="header"></div> -->
     <div id="allContainer">
       <div id="sliderContainer">
-        <div id="leftScroll" class="arrowBar">
+        <div id="leftScroll" class="arrowBar" onclick="pageLeft()">
           <img class="arrow" src="assets/arrow.svg" />
         </div>
         <div id="pictureSection">
-          <img id="picture" src="gallery/oaktree.jpg" />
+          <img id="picture" src="" alt="Load Picture" />
           <div id="storyBlock">
             <h2 id="storyTitle" class="storyText">Lonely Oak Tree</h2>
             <p id="storyBody" class="storyText">
@@ -30,14 +30,18 @@
             </p>
           </div>
         </div>
-        <div id="rightScroll" class="arrowBar">
+        <div id="rightScroll" class="arrowBar" onclick="pageRight()">
           <img class="arrow rotate180" src="assets/arrow.svg" />
         </div>
       </div>
       <div id="thumbnailContainer">
-        <div id="thumbnail_1" class="thumbnail-box">
-          <div class="arrow-up"></div>
-          <img id="picture" src="gallery/oaktree.jpg" />
+        <div id="thumbnail_0" class="thumbnail-box">
+          <div id="upArrow_0" class="arrow-up"></div>
+          <img id="thumbPic_0" class="thumbPic" src="" title="Pic0" alt="NoPicture" />
+        </div>
+        <!-- <div id="thumbnail_1" class="thumbnail-box">
+          <div id="upArrow_1" class="arrow-up"></div>
+          <img class="thumbPic" src="gallery/oaktree.jpg" />
         </div>
         <div id="thumbnail_2" class="thumbnail-box">
           <img id="picture" src="gallery/fox.jpg" />
@@ -48,9 +52,9 @@
         <div id="thumbnail_4" class="thumbnail-box">
           <img id="picture" src="gallery/hotdog.jpg" />
         </div>
-        <div id="thumbnail_4" class="thumbnail-box">
+        <div id="thumbnail_5" class="thumbnail-box">
           <img id="picture" src="gallery/bunny.jpg" />
-        </div>
+        </div> -->
       </div>
     </div>
     <!-- <div id="footer"></div> -->
