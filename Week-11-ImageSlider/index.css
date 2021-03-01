@@ -108,12 +108,15 @@ body {
   flex-direction: row;
   justify-content: center;
   /* position: relative; */
+  overflow: auto;
 }
 .thumbnail-box {
   position: relative;
   border-radius: 3px;
-  height: 70%;
-  width: 5%;
+  min-height: 70%;
+  max-height: 70%;
+  min-width: 5%;
+  max-width: 5%;
   padding: 4px;
   margin-inline: 3px;
   margin-top: 15px;
