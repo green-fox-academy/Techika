@@ -1,15 +1,4 @@
-// define(['require', 'dependency'], function (require, factory) {
-//   'use strict';
-
-// });
-// import { createRequire } from 'module';
-// const require = createRequire(import.meta.url);
-// const fs = require('fs');
-// const pictureNames = fs.readdirSync('./gallery');
-// console.log(pictureNames);
-
 const galleryLocation = './gallery/';
-// const imageNames = ['oaktree.jpg', 'bunny.jpg', 'fox.jpg', 'gekko.jpg', 'hotdog.jpg'];
 const imageNames = [
   {
     filename: 'oaktree.jpg',
@@ -64,8 +53,6 @@ window.onload = function () {
   });
 };
 
-// thumbnailTemplate.getElementById('thumbPic_0').src = 'gallery/oaktree.jpg';
-// document.getElementById("imageid").src="../template/save.png";
 function pickThumbnail(target) {
   document.querySelectorAll('.active').forEach((element) => {
     element.classList.remove('active');
