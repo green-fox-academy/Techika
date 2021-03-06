@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="main.css" />
+    <link rel="stylesheet" type="text/css" href="list-manager.css" />
     <title>List Manager</title>
   </head>
   <body>
@@ -19,6 +19,72 @@
         - If ">" is clicked the selected item should be moved to the right side and the first item on the left side should be selected
     5, Check all the edge cases, no error should be printed to the console
    -->
-    <script type="text/javascript" src="main.js"></script>
+    <div class="CSSed">
+      <div class="wrapper">
+        <div class="left-list box textBox">
+          <div class="list-item selected">bread</div>
+          <div class="list-item">milk</div>
+          <div class="list-item">orange</div>
+          <div class="list-item">tomato</div>
+        </div>
+        <div class="button-stack box">
+          <button type="button" class="button" onclick="up()">Up</button>
+          <button type="button" class="button" onclick="move()">></button>
+          <button type="button" class="button" onclick="remove()">X</button>
+          <button type="button" class="button" onclick="down()">Down</button>
+        </div>
+        <div class="right-list box textBox">
+          <!-- <div class="list-item"></div>
+          <div class="list-item"></div>
+          <div class="list-item"></div>
+          <div class="list-item"></div> -->
+        </div>
+      </div>
+    </div>
+    <div class="JSed"></div>
+    <script type="text/javascript">
+      function up() {
+        const boxList = Array.prototype.slice.call(document.querySelector('.left-list').children);
+        const currIndex = boxList.indexOf(document.querySelector('.selected'));
+        if (currIndex === 0) {
+        } else {
+          document.querySelector('.selected').classList.remove('selected');
+          document.querySelector('.left-list').children[currIndex - 1].classList.add('selected');
+        }
+      }
+      function down() {
+        const boxList = Array.prototype.slice.call(document.querySelector('.left-list').children);
+        const currIndex = boxList.indexOf(document.querySelector('.selected'));
+        if (currIndex === boxList.length - 1) {
+        } else {
+          document.querySelector('.selected').classList.remove('selected');
+          document.querySelector('.left-list').children[currIndex + 1].classList.add('selected');
+        }
+      }
+      function move() {
+        document.querySelector('.right-list').appendChild(document.querySelector('.selected'));
+        document.querySelector('.selected').classList.remove('selected');
+        document.querySelector('.left-list').children[0].classList.add('selected');
+      }
+      function remove() {
+        document.querySelector('.left-list').removeChild(document.querySelector('.selected'));
+        document.querySelector('.left-list').children[0].classList.add('selected');
+      }
+      // -------  JS Generated Content: -----
+      function addBox(tagname) {
+        // create a new div element
+        const newDiv = document.createElement(tagname);
+
+        // and give it some content
+        const newContent = document.createTextNode('Hi there and greetings!');
+
+        // add the text node to the newly created div
+        newDiv.appendChild(newContent);
+
+        // add the newly created element and its content into the DOM
+        const currentDiv = document.getElementById('div1');
+        document.body.appendChild(newDiv);
+      }
+    </script>
   </body>
 </html>

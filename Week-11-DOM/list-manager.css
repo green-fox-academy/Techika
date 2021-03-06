@@ -1,0 +1,51 @@
+.CSSed {
+  background-color: floralwhite;
+  width: 99vw;
+  height: 50vh;
+}
+.CSSed .wrapper {
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  /* background-color: brown; */
+}
+
+.box {
+  width: 140px;
+  height: 6rem;
+  margin: 10px;
+  border: 2px;
+  border-style: ridge;
+  display: flex;
+  flex-direction: column;
+}
+
+.list-item {
+  font-size: 1.2rem;
+  height: 1.2rem;
+  line-height: 120%;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  /* margin-top: 1px;
+  margin-bottom: 1px; */
+  display: flex;
+  align-items: center;
+}
+.selected {
+  background-color: lightgrey;
+}
+
+.right-list {
+  /* height: 6rem; */
+}
+.button-stack {
+  height: fit-content;
+}
+.button {
+  width: 100%;
+  padding: 0px;
+  margin: 0px;
+  font-size: 1rem;
+}
