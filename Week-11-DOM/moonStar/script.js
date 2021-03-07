@@ -22,3 +22,13 @@ function worldClicked(e) {
   newClone.style.top = `${e.clientY}px`;
   document.querySelector('.world').appendChild(newClone);
 }
+
+(function randomFall() {
+  console.log('started');
+  var rand = randBetween(500, 3000);
+  setTimeout(function () {
+    const stars = document.querySelectorAll('.star:not(.fallen)');
+    stars[randBetween(0, stars.length - 1)].classList.add('fallen');
+    randomFall();
+  }, rand);
+})();
