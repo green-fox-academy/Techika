@@ -16,7 +16,7 @@ function randBetween(min = 1, max = 99) {
 
 document.querySelector('.world').addEventListener('click', worldClicked, true);
 function worldClicked(e) {
-  if (e.clientY < 800) {
+  if (e.clientY < 800 && !e.target.classList.contains('moon')) {
     const newClone = starTemplate.cloneNode();
     newClone.style.left = `${e.clientX}px`;
     newClone.style.top = `${e.clientY}px`;
@@ -42,3 +42,33 @@ document.querySelectorAll('.tree').forEach((tree) => {
 function growNode(e) {
   e.currentTarget.appendChild(document.createElement('span'));
 }
+//--- stuff for dragging
+const moon = document.querySelector('.moon');
+moon.onmousedown = function (event) {
+  let shiftX = event.clientX - moon.getBoundingClientRect().left;
+  let shiftY = event.clientY - moon.getBoundingClientRect().top;
+  moon.style.position = 'absolute';
+  moon.style.zIndex = 1000;
+  moveAt(event.pageX, event.pageY);
+
+  function moveAt(pageX, pageY) {
+    moon.style.left = pageX - shiftX + 'px';
+    moon.style.top = pageY - shiftY + 'px';
+  }
+
+  function onMouseMove(event) {
+    moveAt(event.pageX, event.pageY);
+  }
+
+  document.addEventListener('mousemove', onMouseMove);
+
+  moon.onmouseup = function () {
+    document.removeEventListener('mousemove', onMouseMove);
+    moon.onmouseup = null;
+  };
+};
+
+moon.ondragstart = function () {
+  return false;
+};
+// end of dragging stuff
