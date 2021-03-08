@@ -1,7 +1,12 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
 section.world {
   height: 50vw;
   background: black;
   position: relative;
+  overflow: hidden;
 }
 
 @keyframes glow {
@@ -136,7 +141,7 @@ section.world .tree span {
 }
 
 section.world section {
-  height: 100vh;
+  height: 95vh;
   overflow: hidden;
   background: #000900;
 }
@@ -151,7 +156,7 @@ section.world section {
 }
 
 section.world .horizon {
-  width: 100vw;
+  width: 95vw;
   height: 1px;
   bottom: 0;
   background: #0d220d;
@@ -160,7 +165,7 @@ section.world .horizon {
 }
 
 section.world .horizon.second {
-  left: -100vw;
+  left: -95vw;
   animation-delay: 1s;
   box-shadow: inset 0px 0px 40px 20px rgba(0, 0, 0, 0.6);
 }
