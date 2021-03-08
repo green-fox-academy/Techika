@@ -34,13 +34,11 @@ function addStarOnClick(e) {
 //---  proximity prevention
 function noStarsIn50px(newX, newY) {
   const stars = document.querySelectorAll('.star:not(.fallen)');
-  let output = true;
   if (stars.length !== 0) {
     return Array.from(stars).every((star) => {
       const oldX = star.getBoundingClientRect().x;
       const oldY = star.getBoundingClientRect().y;
       const distance = Math.sqrt(Math.pow(newY - oldY, 2) + Math.pow(newX - oldX, 2));
-      console.log(distance);
       if (distance <= 50) {
         return false;
       }
