@@ -61,4 +61,39 @@ app.get('/greeter', (req, res) => {
   res.end(JSON.stringify(resObj));
 });
 
+app.get('/appenda/:appendable', (req, res) => {
+  console.log(req.params.appendable);
+  let resObj = {
+    appended: req.params.appendable + 'a',
+  };
+  res.writeHead(200, { 'Content-Type': 'application/json' });
+  res.end(JSON.stringify(resObj));
+});
+
+// const jsonParser = bodyParser.json();
+app.use(express.json());
+app.post('/dountil/:action/', (req, res) => {
+  const n = Number(req.body.until);
+  let resObj = {};
+  if (req.params.action === 'sum') {
+    const solution = (n * (n + 1)) / 2;
+    resObj = {
+      result: solution,
+    };
+  } else if (req.params.action === 'factor') {
+    const solution = (n) => {
+      let result = n;
+      for (let i = n - 1; i > 0; i--) {
+        result = result * i;
+      }
+      return result;
+    };
+    resObj = {
+      result: solution(n),
+    };
+  }
+
+  res.json(resObj);
+});
+
 app.listen(3001);
