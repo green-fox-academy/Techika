@@ -6,15 +6,7 @@ app.use(express.static('assets'));
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
-// app.get('/doubling', (req, res) => {
-//   // res.send(String(parseInt(req.params.input) * 2));
-//   console.log('input:' + req.query.input);
-//   res.writeHead(200, { 'Content-Type': 'application/json' });
-//   myObj = {
-//     error: 'Please provide an input!',
-//   };
-//   res.end(JSON.stringify(myObj));
-// });
+
 app.get('/doubling', (req, res) => {
   res.writeHead(200, { 'Content-Type': 'application/json' });
   let resObj = {};
@@ -66,7 +58,7 @@ app.get('/appenda/:appendable', (req, res) => {
   let resObj = {
     appended: req.params.appendable + 'a',
   };
-  res.writeHead(200, { 'Content-Type': 'application/json' });
+  res.writeHead(200, { 'Content-Type': 'application/json' }
   res.end(JSON.stringify(resObj));
 });
 
