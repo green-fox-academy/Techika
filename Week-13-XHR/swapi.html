@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SWAPI</title>
+  <script>
+    window.onload = function() {
+      const searchButton = document.querySelector('.search');
+      searchButton.addEventListener('click', fetchFilms);
+    }
+    function fetchFilms(){
+      const titleRequest = new XMLHttpRequest();
+      const titleQueryRoot = "https://swapi.dev/api/people/?search=";
+      const titleSearchTerm = document.queryForm.query.value;
+      const leftBox = document.querySelector('.resultsBoxLeft');
+      titleRequest.open('GET', `${titleQueryRoot}${titleSearchTerm}`,true);
+      titleRequest.onload = function(){
+        const resObj = JSON.parse(titleRequest.responseText);
+        const nameList = resObj.results.map((subj) => subj.name);
+        nameList.forEach((name) => {
+          const newElement = document.createElement('li');
+          newElement.textContent = name;
+          leftBox.appendChild(newElement);
+        });
+      }; 
+      titleRequest.send()
+      //document.queryForm.reset();
+      event.preventDefault()
+    }
+    
+
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="inputRibbon">
+      <form class="inputForm" name="queryForm">
+        <label class="inputTitle" for="query">Enter character name</label>
+        <input type="text" class="inputBox" name="query"></input>
+        <button type="submit" class="search">search</button>
+      </form>
+    </div>
+    <ul class="resultsBoxLeft">
+
+    </ul>
+    <div class="resultsBoxRight">
+      <ul class="resultItem"></ul>
+    </div>
+  </div>
+</body>
+</html>
