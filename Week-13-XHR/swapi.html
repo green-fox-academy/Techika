@@ -1,53 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SWAPI</title>
-  <script>
-    window.onload = function() {
-      const searchButton = document.querySelector('.search');
-      searchButton.addEventListener('click', fetchFilms);
-    }
-    function fetchFilms(){
-      const titleRequest = new XMLHttpRequest();
-      const titleQueryRoot = "https://swapi.dev/api/people/?search=";
-      const titleSearchTerm = document.queryForm.query.value;
-      const leftBox = document.querySelector('.resultsBoxLeft');
-      titleRequest.open('GET', `${titleQueryRoot}${titleSearchTerm}`,true);
-      titleRequest.onload = function(){
-        const resObj = JSON.parse(titleRequest.responseText);
-        const nameList = resObj.results.map((subj) => subj.name);
-        nameList.forEach((name) => {
-          const newElement = document.createElement('li');
-          newElement.textContent = name;
-          leftBox.appendChild(newElement);
-        });
-      }; 
-      titleRequest.send()
-      //document.queryForm.reset();
-      event.preventDefault()
-    }
-    
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SWAPI</title>
+    <script>
+        window.onload = function() {
+            const searchButton = document.querySelector('.search');
+            searchButton.addEventListener('click', fetchPeople);
+        }
+        function fetchPeople(){
+            const request = new XMLHttpRequest();
+            const titleQueryRoot = "https://swapi.dev/api/people/?search=";
+            const titleSearchTerm = document.queryForm.query.value;
+            const leftBox = document.querySelector('.resultsBoxLeft');
+            document.querySelector('.resultsBoxRight').textContent = '';
+            leftBox.textContent = '';
+            request.open('GET', `${titleQueryRoot}${titleSearchTerm}`,true);
+            request.onload = function(){
+                const resObj = JSON.parse(request.responseText);
+                const nameList = resObj.results.map((subj) => subj.name);
+                nameList.forEach((name) => {
+                    const newElement = document.createElement('li');
+                    newElement.className = 'resultItem';
+                    newElement.textContent = name;
+                    newElement.addEventListener('click', fetchFilm);
+                    leftBox.appendChild(newElement);
+                });
+            }; 
+            request.send()
+            event.preventDefault()
+        }
 
-  </script>
+        function fetchFilm(e) {
+            const request = new XMLHttpRequest();
+            const titleQueryRoot = "https://swapi.dev/api/people/?search=";
+            const titleSearchTerm = e.currentTarget.textContent;
+            const rightBox = document.querySelector('.resultsBoxRight');
+            const previousSelection = document.querySelector('.selected');
+            if (previousSelection) {previousSelection.classList.toggle('selected')};
+            e.currentTarget.classList.toggle('selected');
+            rightBox.textContent = '';
+            request.open('GET', `${titleQueryRoot}${titleSearchTerm}`,true);
+            request.onload = function(){
+                const resObj = JSON.parse(request.responseText);     
+                resObj.results[0].films.forEach((subj) => {
+                    const request2 = new XMLHttpRequest();
+                    request2.open('GET', `${subj}`,true);
+                    request2.onload = () => { 
+                        const resObj2 = JSON.parse(request2.responseText);
+                        const newElement = document.createElement('li');
+                        newElement.className = 'resultItem';
+                        newElement.textContent = `${resObj2.title} (${resObj2.release_date})`;
+                        rightBox.appendChild(newElement);
+                    }
+                    request2.send();
+                });
+            }; 
+            request.send() ;
+            event.preventDefault();
+        }       
+    </script>
+    <style type="text/css">
+        .inputRibbon{
+            background-color: rosybrown;
+        }
+        .resultsWrapper{
+            display:flex;
+            flex-direction:row;
+            /* justify-content: space-between; */
+            background-color:bisque;
+        }
+        .resultsBoxRight ,.resultsBoxLeft{
+            width:fit-content;
+            background-color:lightgray;
+        }
+        .resultsBoxRight, .selected{
+            background-color:gray;
+        }
+
+    </style>
 </head>
 <body>
-  <div class="container">
-    <div class="inputRibbon">
-      <form class="inputForm" name="queryForm">
-        <label class="inputTitle" for="query">Enter character name</label>
-        <input type="text" class="inputBox" name="query"></input>
-        <button type="submit" class="search">search</button>
-      </form>
+    <div class="container">
+        <div class="inputRibbon">
+            <form class="inputForm" name="queryForm">
+                <label class="inputTitle" for="query">Enter character name</label>
+                <input type="text" class="inputBox" name="query"></input>
+                <button type="submit" class="search">search</button>
+            </form>
+        </div>
+        <div class="resultsWrapper">
+            <ul class="resultsBoxLeft"></ul>
+            <ul class="resultsBoxRight"></ul>
+        </div>
     </div>
-    <ul class="resultsBoxLeft">
-
-    </ul>
-    <div class="resultsBoxRight">
-      <ul class="resultItem"></ul>
-    </div>
-  </div>
 </body>
 </html>
