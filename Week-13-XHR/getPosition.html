@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IP locator</title>
+    <style type="text/css">
+      h1,
+      .search-bar label {
+        font-weight: bold;
+      }
+      .search-bar {
+        display: flex;
+        flex-direction: row;
+      }
+      .search-bar input {
+        width: 200px;
+        color: blueviolet;
+      }
+    </style>
+    <script type="text/javascript">
+      window.onload = function () {
+        const button = document.querySelector('#lookUp');
+        button.addEventListener('click', () => {
+          const request = new XMLHttpRequest();
+          const baseURL = 'http://api.ipapi.com/';
+          const IP = document.ipSearchForm.input.value;
+          const APIkey = '?access_key=423896c5c8781673af7656df455580e9';
+          request.open('GET', `${baseURL}${IP}${APIkey}`, true);
+          request.onload = function () {
+            const response = JSON.parse(request.responseText);
+            const city = response.city;
+            let zoom = 1;
+            let zoomer = setInterval(()=>{
+              document.getElementById('map').src = `https://www.google.com/maps/embed/v1/place?key=AIzaSyCpc-OlKPSeJq6Sc8wCRdEg-t2CzPPilXQ&q=city:${city}&zoom=${zoom}`;
+              if(zoom === 10){
+                clearInterval(zoomer);
+              } else {
+                zoom += 1;
+              }
+            },2000)
+          };
+          request.send();
+          event.preventDefault();
+        });
+      };
+    </script>
+  </head>
+  <body>
+    <div class="allWrapper">
+      <ti><h1>Who's behind the IP?</h1></ti>
+      <div class="search-bar">
+        <form action="search" name="ipSearchForm">
+          <label for="search-field">IP address</label>
+          <input type="text" name="input" />
+          <button type="submit" id="lookUp" name="lookUp">Look up</button>
+        </form>
+      </div>
+      <div class="map-wrapper">
+        <iframe
+          id="map"
+          width="600"
+          height="600"
+          style="border: 1"
+          loading="lazy"
+          allowfullscreen
+          src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCpc-OlKPSeJq6Sc8wCRdEg-t2CzPPilXQ&q=city:Budapest&zoom=1"
+          <!-- "https://maps.googleapis.com/maps/api/place/textsearch/json?query=123+main+street&location=42.3675294,-71.186966&radius=10000&key=YOUR_API_KEY" -->
+        >
+        </iframe>
+      </div>
+    </div>
+  </body>
+</html>
