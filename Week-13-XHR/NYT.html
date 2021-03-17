@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>New York Times searcher</title>
+    <style></style>
+    <script type="text/javascript">
+      const resultTemplate = (params) => {
+        return `
+        <div class="resultWrapper">
+          <h2><a href="${params.permalink}">${params.headline}</a></h2>
+          <p class="resultSnippet">${params.snippet}</p>
+          <p class="resultDate">${params.date}</p>
+        </div>
+        `;
+      };
+      window.onload = function () {
+        const button = document.querySelector('#lookUp');
+        button.addEventListener('click', (e) => {
+          const request = new XMLHttpRequest();
+          const query = document.searchForm.input.value;
+          request.open(
+            'GET',
+            `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${query}&api-key=nxvjX5PEUabxD8mbGsfLWSYNAXwg1Apc`,
+            true
+          );
+          request.onload = function () {
+            const response = JSON.parse(request.responseText).response.docs;
+            const container = document.querySelector('.response-container');
+            console.log(response);
+            console.log(response.response);
+            response.forEach((element) => {
+              const newNode = document.createElement('div');
+              newNode.innerHTML = resultTemplate({
+                permalink: element.web_url,
+                snippet: element.abstract,
+                date: element.pub_date.split('T')[0],
+                headline: element.headline.main.split(';')[0],
+              });
+              container.appendChild(newNode);
+            });
+          };
+          request.send();
+          e.preventDefault();
+        });
+      };
+    </script>
+  </head>
+  <body>
+    <div class="search-bar">
+      <form action="search" name="searchForm">
+        <label for="search-field">o- for articles in NYT:</label>
+        <input type="text" name="input" value="moon landing by Apollo 11" />
+        <button type="submit" id="lookUp" name="lookUp">Look up</button>
+      </form>
+    </div>
+    <div class="response-container"></div>
+  </body>
+</html>
+<!-- 
+  https://github.com/green-fox-academy/teaching-materials/blob/master/workshop/xhr/new-york-times/README.md
+
+  https://developer.nytimes.com/docs/articlesearch-product/1/overview
+  https://developer.nytimes.com/my-apps/4e6f294d-38d6-409f-9a59-3e886fd2331f
+
+  Search interesting articles on The New York Times.
+
+Create an Account and register an app using localhost as the website URL to get your API key.
+
+Use the Article Search API
+Find articles about the moon landing by Apollo 11
+Display the following fields in a list
+Headline
+Snippet
+Publication date
+Create a permalink for each article 
+
+/// fix live serer::https://www.freecodecamp.org/news/visual-studio-code-live-server-not-working/
+-->
