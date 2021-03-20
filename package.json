@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "---\r ```\r   .--.            .--.\r  ( (`\\\\.\"--``--\".//`) )\r   '-.   __   __    .-'\r    /   /__\\ /__\\   \\\r   |    \\ 0/ \\ 0/    |\r   \\     `/   \\`     /\r    `-.  /-\"\"\"-\\  .-`\r      /  '.___.'  \\\r      \\     I     /\r       `;--'`'--;`\r         '.___.'\r ```\r ---",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint . --ext .ts",
