@@ -82,11 +82,14 @@ app.get('/bookstore', (req, res) => {
       INNER JOIN category ON master.cate_id = category.cate_id
       INNER JOIN publisher ON master.pub_id = publisher.pub_id
     HAVING
-      category like "%${req.query.category || ''}%" AND
-      publisher like "%${req.query.publisher || ''}%" AND
-      book_name like "%${req.query.title || ''}%" AND
-      author like "%${req.query.author || ''}%" AND
-      book_price BETWEEN ${req.query.pgt || 0} AND ${req.query.plt || 10000};
+      category like '%'
+      ${req.query.category ? `AND category like "%${req.query.category}%"` : ''}
+      ${req.query.publisher ? `AND publisher like "%${req.query.publisher}%"` : ''}
+      ${req.query.title ? `AND book_name like "%${req.query.title}%"` : ''}
+      ${req.query.author ? `AND author like "%${req.query.author}%"` : ''}
+      ${req.query.category ? `AND category like "%${req.query.category}%"` : ''}
+      ${req.query.pgt ? `AND book_price > ${req.query.pgt}` : ''}
+      ${req.query.plt ? `AND book_price < ${req.query.plt}` : ''}
   ;`,
     (err, rows) => {
       if (err) {
