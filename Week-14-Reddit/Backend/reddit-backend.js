@@ -24,6 +24,13 @@ const credentials = {
   password: '2EFWg#z!jgu329',
   database: 'reddit',
 };
+const dbPool = mysql.createPool({
+  host: 'localhost',
+  user: 'root',
+  password: '2EFWg#z!jgu329',
+  database: 'reddit',
+  // connectionLimit: 100,
+});
 //---------------------Middle-Warez-----------------------------------------------
 app.use('/', (req, res, next) => {
   req.accepts('application/json');
@@ -37,38 +44,51 @@ app.get('/hello', (req, res) => {
 });
 //----------------------CORE ---------------------------------------------
 app.get('/posts', (req, res) => {
-  const db = mysql.createConnection(credentials);
-  db.query(
-    `
-    select 
-    p.post_id as id, 
-      p.title, p.url, 
-      p.timestamp, 
-      p.score,  
-      u.username as owner, 
-      w.vote as vote from reddit.posts as p
-  left join reddit.users as u on p.owner_id = u.user_id
-  left join reddit.votes as w on w.post_id = p.post_id 
-  and w.user_id = (
-    select j.user_id from reddit.users as j
-      where j.username = ?
-  )
-  group by p.post_id
-    ;
-    `,
-    req.headers.username,
-    (err, rows) => {
-      if (err) {
-        console.error(`Cannot retrieve data: ${err.toString()}`);
-        res.sendStatus(500);
-        return null;
+  // const db = mysql.createConnection(credentials);
+  dbPool.getConnection((err, db) => {
+    if (err) console.error(err);
+    console.log('MySQL Connection Established: ', db.threadId);
+    db.query(
+      `
+      SELECT 
+        p.post_id AS id, 
+        p.title, 
+        p.url, 
+        p.timestamp, 
+        p.score,  
+        u.username AS owner, 
+        w.vote AS vote FROM reddit.posts AS p
+      LEFT JOIN reddit.users AS u ON p.owner_id = u.user_id
+      LEFT JOIN reddit.votes AS w ON w.post_id = p.post_id 
+      AND w.user_id = (
+        SELECT j.user_id FROM reddit.users AS j
+          WHERE j.username = ?
+      )
+      GROUP BY p.post_id
+      ;
+      `,
+      [req.headers.username],
+      (err, results) => {
+        if (err) {
+          console.error(`Cannot retrieve data: ${err.toString()}`);
+          res.sendStatus(500);
+          return null;
+        }
+        // db.end();
+        db.release((err) => {
+          if (err) console.error(err);
+        });
+
+        const temp = JSON.stringify(results, null, 2);
+        return res.send('<PRE>' + temp + '</PRE>');
       }
-      db.end();
-      const temp = JSON.stringify(rows, null, 2);
-      return res.send('<PRE>' + temp + '</PRE>');
-    }
-  );
+    );
+  });
 });
+
+// app.post('/posts'), (req, res) => {
+
+// }
 //---------------------MAINTENANCE---------------------------------------
 app.get('/maintain', (req, res) => {
   const db = mysql.createConnection(credentials);
@@ -98,4 +118,6 @@ app.get('/maintain', (req, res) => {
   );
 });
 //-----------------------------------------------------------------------
-app.listen(8080);
+app.listen(8080, () => {
+  console.log('Server listening on port 8080.');
+});
