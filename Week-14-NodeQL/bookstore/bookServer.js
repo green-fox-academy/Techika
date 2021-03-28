@@ -83,13 +83,13 @@ app.get('/bookstore', (req, res) => {
       INNER JOIN publisher ON master.pub_id = publisher.pub_id
     HAVING
       category like '%'
-      ${req.query.category ? `AND category like "%${req.query.category}%"` : ''}
-      ${req.query.publisher ? `AND publisher like "%${req.query.publisher}%"` : ''}
-      ${req.query.title ? `AND book_name like "%${req.query.title}%"` : ''}
-      ${req.query.author ? `AND author like "%${req.query.author}%"` : ''}
-      ${req.query.category ? `AND category like "%${req.query.category}%"` : ''}
-      ${req.query.pgt ? `AND book_price > ${req.query.pgt}` : ''}
-      ${req.query.plt ? `AND book_price < ${req.query.plt}` : ''}
+    ${req.query.category ? `AND category like "%${mysql.escape(`%${req.query.category}%`)}` : ''}
+    ${req.query.publisher ? `AND publisher like "%${mysql.escape(`%${req.query.publisher}%`)}` : ''}
+    ${req.query.title ? `AND book_name like "%${mysql.escape(`%${req.query.title}%`)}` : ''}
+    ${req.query.author ? `AND author like ${mysql.escape(`%${req.query.author}%`)}` : ''}
+    ${req.query.category ? `AND category like "%${mysql.escape(`%${req.query.category}%`)}` : ''}
+    ${req.query.pgt ? `AND book_price > ${mysql.escape(req.query.pgt)}` : ''}
+    ${req.query.plt ? `AND book_price < ${mysql.escape(req.query.plt)}` : ''}
   ;`,
     (err, rows) => {
       if (err) {
