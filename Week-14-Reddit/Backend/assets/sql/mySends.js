@@ -13,7 +13,7 @@ export default {
   reQuery: (results, res, xhrRequest, dbConnection) => {
     const req = {
       headers: {
-        postID: results.insertId,
+        postID: results.insertId || xhrRequest.params.postid,
         username: xhrRequest.headers.username,
       },
     };

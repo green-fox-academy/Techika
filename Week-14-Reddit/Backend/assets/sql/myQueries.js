@@ -1,4 +1,5 @@
 import * as mysql from 'mysql';
+import myQueries from './myQueries.js';
 export default {
   getPosts: (req) => {
     return [
@@ -43,6 +44,32 @@ export default {
       [req.body.title, req.body.url, req.headers.username],
     ];
   },
+  votePosts: (req) => {
+    // console.log({ params: { postid: req.params.postid } });
+    // console.log(myQueries.maintainScores({ params: { postid: req.params.postid } }));
+    return [
+      `
+      INSERT INTO reddit.votes (user_id, post_id, vote) 
+      VALUES (
+        (
+          SELECT u.user_id 
+          FROM reddit.users AS u 
+          WHERE u.username = ?
+        )
+        , ? 
+        , IF(${`${mysql.escape(req.params.vote)}`} = 'upvote',1,-1) 
+      )
+      ON DUPLICATE KEY UPDATE 
+      vote = IF( ${mysql.escape(req.params.vote)} = 'downvote',
+        IF(vote = -1, 0, -1),
+            IF(${mysql.escape(req.params.vote)} = 'upvote' and vote = 1, 0, 1) 
+        )
+      ;
+      ${myQueries.maintainScores({ params: { postid: req.params.postid } })}
+      `,
+      [req.headers.username, req.params.postid, req.params.vote],
+    ];
+  },
   maintainScores: (req) => {
     return [
       `
@@ -53,7 +80,9 @@ export default {
           FROM reddit.votes
         GROUP BY reddit.votes.post_id
       ) AS v on p.post_id = v.post_id
-      SET p.score = v.Vscore
+      SET p.score = ifnull(Vscore,0)
+      WHERE p.is_deleted = 0
+      ${req.params.postid ? `AND p.post_id = ${mysql.escape(`${req.params.postid}`)}` : ''}
       ;
       `,
     ];

@@ -1,34 +1,12 @@
-// Plot:
-// Headers:
-
-// Accept: application/json
-// (Optional) Username: username
-// --------------------------------
-
-// GET /posts
-// POST /posts
-// PUT /posts/<id>/upvote
-// PUT /posts/<id>/downvote
-
-// Optional Feature endpoints
-// DELETE /posts/<id></id>
-// PUT /posts/<id></id>
 //---------------------IMPORTS-------------------------------------------
 'use strict';
 import express from 'express';
 const app = express();
-import * as mysql from 'mysql';
-import * as loginto from './assets/loginto.js';
 import dbConnect from './assets/sql/dbconnect.js';
-// import myScallback from './assets/sql/myScallback.js';
-// import queries from './assets/sql/myQueries.js';
-
 import myQueries from './assets/sql/myQueries.js';
 import myErrors from './assets/sql/myErrors.js';
 import mySends from './assets/sql/mySends.js';
 import doQuery from './assets/sql/doQuery.js';
-
-// console.log(queries.getPosts);
 
 //---------------------INIT-------------------------------------------
 const dbPool = dbConnect();
@@ -70,6 +48,30 @@ app.post('/posts', (req, res) => {
     xhrResponse: res,
     dbConnection: dbPool,
     dbQuery: myQueries.postPosts,
+    xhrOutputMethod: mySends.reQuery,
+  });
+});
+
+app.put('/posts/:postid/:vote', (req, res) => {
+  // prevalidation:
+  if (!((req.params.vote === 'upvote' || req.params.vote === 'downvote') && req.headers.username)) {
+    let errorMsg = '';
+    if (!req.headers.username) {
+      errorMsg = 'username must be sent via header';
+    } else if (!(req.params.vote === 'upvote' || req.params.vote === 'downvote')) {
+      errorMsg = 'Valid put options for /posts/<postID>/: upvote or downvote';
+    }
+    res.status(400).json({
+      error: errorMsg,
+    });
+    return;
+  }
+  // core
+  doQuery({
+    xhrRequest: req,
+    xhrResponse: res,
+    dbConnection: dbPool,
+    dbQuery: myQueries.votePosts,
     xhrOutputMethod: mySends.reQuery,
   });
 });
