@@ -20,14 +20,14 @@ export default {
               WHERE j.username = ${mysql.escape(req.headers.username)}
           )
       WHERE p.is_deleted = 0
-        ${req.headers.postID ? `AND p.post_id = ${mysql.escape(req.headers.postID)} ` : ''}
+        ${req.params.postid ? `AND p.post_id = ${mysql.escape(req.params.postid)} ` : ''}
       GROUP BY p.post_id
       ;
       `,
     ];
   },
 
-  postPosts: (req) => {
+  postPost: (req) => {
     return [
       `
       INSERT INTO reddit.posts 
@@ -44,9 +44,46 @@ export default {
       [req.body.title, req.body.url, req.headers.username],
     ];
   },
-  votePosts: (req) => {
-    // console.log({ params: { postid: req.params.postid } });
-    // console.log(myQueries.maintainScores({ params: { postid: req.params.postid } }));
+  checkPostOwner: (req) => {
+    return [
+      `
+      SELECT 
+        p.post_id
+      FROM reddit.posts p
+      WHERE p.post_id = ?
+        AND p.is_deleted = 0
+        AND p.owner_id = (
+          SELECT u.user_id 
+          FROM reddit.users AS u 
+          WHERE u.username = ?
+          )
+      ;
+      `,
+      [req.params.postid, req.headers.username],
+    ];
+  },
+
+  updatePost: (req) => {
+    return [
+      `
+      UPDATE reddit.posts p
+      SET 
+        p.owner_id = p.owner_id
+        ${req.body.title ? `, p.title = ${mysql.escape(`${req.body.title}`)}` : ''}
+        ${req.body.url ? `, p.url = ${mysql.escape(`${req.body.url}`)}` : ''}
+      WHERE
+	      p.post_id = ?
+        AND p.owner_id = (
+          SELECT u.user_id 
+          FROM reddit.users AS u 
+          WHERE u.username = ?
+          )
+      ;
+      `,
+      [req.params.postid, req.headers.username],
+    ];
+  },
+  votePost: (req) => {
     return [
       `
       INSERT INTO reddit.votes (user_id, post_id, vote) 
@@ -68,6 +105,25 @@ export default {
       ${myQueries.maintainScores({ params: { postid: req.params.postid } })}
       `,
       [req.headers.username, req.params.postid, req.params.vote],
+    ];
+  },
+  deletePost: (req) => {
+    return [
+      `
+      UPDATE reddit.posts p
+      SET 
+        p.is_deleted = 1
+      WHERE
+        p.is_deleted = 0
+        AND p.post_id = ?
+        AND p.owner_id = (
+          SELECT u.user_id 
+          FROM reddit.users AS u 
+          WHERE u.username = ?
+          )
+      ;
+      `,
+      [req.params.postid, req.headers.username],
     ];
   },
   maintainScores: (req) => {

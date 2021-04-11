@@ -3,25 +3,14 @@ import doQuery from './doQuery.js';
 import myQueries from './myQueries.js';
 
 export default {
-  default: (results, res) => {
-    return res.json(results);
+  default: ({ queryResults, xhrResponse }) => {
+    return xhrResponse.json(queryResults);
   },
-  test: (results, res) => {
-    const temp = JSON.stringify(results, null, 2);
-    return res.send('<PRE>' + temp + '</PRE>');
+  test: ({ queryResults, xhrResponse }) => {
+    const temp = JSON.stringify(queryResults, null, 2);
+    return xhrResponse.send('<PRE>' + temp + '</PRE>');
   },
-  reQuery: (results, res, xhrRequest, dbConnection) => {
-    const req = {
-      headers: {
-        postID: results.insertId || xhrRequest.params.postid,
-        username: xhrRequest.headers.username,
-      },
-    };
-    doQuery({
-      xhrRequest: req,
-      xhrResponse: res,
-      dbConnection: dbConnection,
-      dbQuery: myQueries.getPosts,
-    });
+  reQuery: ({ queryResults, xhrResponse, xhrRequest, dbConnection, nextQuery }) => {
+    doQuery(xhrRequest, xhrResponse, dbConnection, { preSults: queryResults, ...nextQuery });
   },
 };

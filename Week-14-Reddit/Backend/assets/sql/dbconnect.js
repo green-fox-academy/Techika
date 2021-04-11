@@ -1,8 +1,9 @@
 import * as mysql from 'mysql';
-import * as loginto from '../loginto.js';
+import loginto from '../loginto.js';
 
 export default function dbConnect() {
-  const dbPool = mysql.createPool(loginto.database);
+  const dbPool = mysql.createPool(loginto.database.local);
+  // ===ADD LISTENERS===
   dbPool.on('enqueue', function () {
     console.log('Waiting for available connection slot');
   });
