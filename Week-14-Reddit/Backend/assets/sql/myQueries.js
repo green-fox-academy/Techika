@@ -12,11 +12,11 @@ export default {
         p.score,  
         u.username AS owner, 
         IFNULL (w.vote,0) AS vote 
-      FROM reddit.posts AS p
-        LEFT JOIN reddit.users AS u ON p.owner_id = u.user_id
-        LEFT JOIN reddit.votes AS w ON w.post_id = p.post_id 
+      FROM posts AS p
+        LEFT JOIN users AS u ON p.owner_id = u.user_id
+        LEFT JOIN votes AS w ON w.post_id = p.post_id 
           AND w.user_id = (
-            SELECT j.user_id FROM reddit.users AS j
+            SELECT j.user_id FROM users AS j
               WHERE j.username = ${mysql.escape(req.headers.username)}
           )
       WHERE p.is_deleted = 0
@@ -30,12 +30,12 @@ export default {
   postPost: (req) => {
     return [
       `
-      INSERT INTO reddit.posts 
+      INSERT INTO posts 
         (title, url, owner_id) 
       VALUES 
         (?, ?, NULLIF((
           SELECT u.user_id 
-          FROM reddit.users AS u 
+          FROM users AS u 
           WHERE u.username = ?
           ),'')
         )
@@ -49,12 +49,12 @@ export default {
       `
       SELECT 
         p.post_id
-      FROM reddit.posts p
+      FROM posts p
       WHERE p.post_id = ?
         AND p.is_deleted = 0
         AND p.owner_id = (
           SELECT u.user_id 
-          FROM reddit.users AS u 
+          FROM users AS u 
           WHERE u.username = ?
           )
       ;
@@ -66,7 +66,7 @@ export default {
   updatePost: (req) => {
     return [
       `
-      UPDATE reddit.posts p
+      UPDATE posts p
       SET 
         p.owner_id = p.owner_id
         ${req.body.title ? `, p.title = ${mysql.escape(`${req.body.title}`)}` : ''}
@@ -75,7 +75,7 @@ export default {
 	      p.post_id = ?
         AND p.owner_id = (
           SELECT u.user_id 
-          FROM reddit.users AS u 
+          FROM users AS u 
           WHERE u.username = ?
           )
       ;
@@ -86,11 +86,11 @@ export default {
   votePost: (req) => {
     return [
       `
-      INSERT INTO reddit.votes (user_id, post_id, vote) 
+      INSERT INTO votes (user_id, post_id, vote) 
       VALUES (
         (
           SELECT u.user_id 
-          FROM reddit.users AS u 
+          FROM users AS u 
           WHERE u.username = ?
         )
         , ? 
@@ -110,7 +110,7 @@ export default {
   deletePost: (req) => {
     return [
       `
-      UPDATE reddit.posts p
+      UPDATE posts p
       SET 
         p.is_deleted = 1
       WHERE
@@ -118,7 +118,7 @@ export default {
         AND p.post_id = ?
         AND p.owner_id = (
           SELECT u.user_id 
-          FROM reddit.users AS u 
+          FROM users AS u 
           WHERE u.username = ?
           )
       ;
@@ -129,12 +129,12 @@ export default {
   maintainScores: (req) => {
     return [
       `
-      UPDATE reddit.posts p
+      UPDATE posts p
       LEFT JOIN 
       (
-        SELECT post_id, sum(reddit.votes.vote) AS Vscore 
-          FROM reddit.votes
-        GROUP BY reddit.votes.post_id
+        SELECT post_id, sum(votes.vote) AS Vscore 
+          FROM votes
+        GROUP BY votes.post_id
       ) AS v on p.post_id = v.post_id
       SET p.score = ifnull(Vscore,0)
       WHERE p.is_deleted = 0
