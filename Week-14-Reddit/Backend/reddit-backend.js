@@ -96,7 +96,7 @@ app.put('/posts/:postid/:vote?', (req, res) => {
       xhrOutputMethod: mySends.reQuery,
       nextQuery: {
         dbQuery: myQueries.votePost,
-        xhrOutptMethod: mySends.reQuery,
+        xhrOutputMethod: mySends.reQuery,
       },
     });
   }
