@@ -1,0 +1,29 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+#main-container {
+  display: grid;
+  width: 100vw;
+  height: 500px;
+  grid-gap: 8px;
+  grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+  background-color: black;
+}
+
+.purple {
+  background-color: rebeccapurple;
+}
+.green {
+  background-color: green;
+  grid-column: 2 / 4;
+  grid-row: 1 / 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.yellow {
+  background-color: yellow;
+  width: 80%;
+  height: 60%;
+}

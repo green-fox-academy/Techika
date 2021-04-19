@@ -1,0 +1,30 @@
+* {
+  padding: 0px;
+  margin: 0px;
+  border: 0px;
+}
+#main-container {
+  box-sizing: border-box;
+  margin: 4px 2px 2px 2px;
+  padding: 9px;
+  background-color: purple;
+  display: grid;
+  width: calc(100vw-4px);
+  height: 150px;
+  grid-template-columns: 1fr 60% 1fr;
+  grid-gap: 9px;
+}
+
+.box {
+  color: whitesmoke;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#left-box,
+#right-box {
+  background: darkgoldenrod;
+}
+#mid-box {
+  background: green;
+}
