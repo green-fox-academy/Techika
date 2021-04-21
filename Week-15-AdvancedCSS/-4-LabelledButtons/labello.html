@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="labello.css" />
+    <script src="https://kit.fontawesome.com/ce4c28f0c8.js" crossorigin="anonymous"></script>
+    <title>Labelled Buttons</title>
+  </head>
+  <body>
+    <div id="container">
+      <div class="button-wrapper" id="delete-button-wrapper">
+        <button class="button" data-action="delete">
+          <i class="far fa-trash-alt"></i>
+        </button>
+        <label class="label" for="delete-button-wrapper">
+          <div class="arrow-right"></div>
+          <p>Delete</p>
+        </label>
+      </div>
+      <div class="button-wrapper" id="confirm-button-wrapper">
+        <button class="button" data-action="confirm">
+          <i class="fas fa-check"></i>
+        </button>
+        <label class="label" for="confirm-button-wrapper">
+          <div class="arrow-right"></div>
+          <p>Sure?</p>
+        </label>
+      </div>
+    </div>
+
+    <i class="far fa-trash-alt"></i>
+    <i class="fas fa-check"></i>
+  </body>
+</html>

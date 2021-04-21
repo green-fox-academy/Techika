@@ -1,0 +1,36 @@
+* {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+body {
+  width: 100%;
+  height: 100%;
+}
+.green {
+  background-color: #51d400;
+}
+.yellow {
+  background-color: #ffd62a;
+}
+.purple {
+  background-color: #b02aff;
+}
+.C {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+.C1 .item {
+  min-width: 100px;
+  min-height: 100px;
+}
+.C1 {
+  display: flex;
+  justify-content: center;
+}
+
+@media screen and (max-width: 500px) {
+  .C1 {
+    flex-direction: column;
+  }
+}

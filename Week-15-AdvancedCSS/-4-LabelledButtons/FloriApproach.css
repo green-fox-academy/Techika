@@ -1,0 +1,87 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #2f3060;
+}
+
+.holder {
+  width: 25vw;
+  height: 25vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.btn {
+  position: relative;
+  outline: none;
+  border: none;
+  border-radius: 2px;
+  width: 30px;
+  height: 30px;
+  background-color: rgb(20, 19, 19);
+}
+
+.fas {
+  color: whitesmoke;
+}
+
+.btn:after {
+  z-index: 10;
+  display: none;
+  color: whitesmoke;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2px;
+  top: 0;
+  left: 100%;
+  content: attr(data-action);
+  height: 30px;
+  width: 90px;
+}
+
+.btn:hover:after {
+  display: flex;
+}
+
+.btn[data-action='delete']:hover:after {
+  background-color: #d34231;
+}
+
+.btn[data-action='confirm']:hover:after {
+  background-color: #19a553;
+}
+
+.btn[data-action='delete']:hover > .fas {
+  color: #d34231;
+}
+
+.btn[data-action='confirm']:hover > .fas {
+  color: #19a553;
+}
+
+.btn:before {
+  z-index: 11;
+  display: none;
+  position: absolute;
+  top: 10px;
+  left: 100%;
+  content: '';
+  border: 5px solid transparent;
+  border-left-color: rgb(20, 19, 19);
+}
+
+.btn:hover:before {
+  display: block;
+}
