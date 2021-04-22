@@ -1,0 +1,89 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+#container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #313841;
+}
+
+.button-wrapper {
+  margin: 25px;
+  display: flex;
+  flex-direction: row;
+  width: 120px;
+  height: 30px;
+  align-items: center;
+}
+
+button {
+  height: 30px;
+  width: 30px;
+  background-color: #1c242b;
+  color: #d2d3d5;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  /* border: hidden; */
+}
+button:hover + .label {
+  display: flex;
+}
+
+label {
+  position: relative;
+  display: none;
+  flex-grow: 1;
+  height: 30px;
+  border: 2px;
+  justify-content: center;
+  align-items: center;
+}
+
+.arrow-right {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 5px solid #1c242b;
+  left: 0%;
+}
+
+p {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.7rem;
+  font-weight: bold;
+}
+
+i {
+  font-size: 0.8rem;
+}
+
+/* =====SPECIFIC CONTENT BELOW:===== */
+
+button[data-action='delete'] {
+}
+button[data-action='delete'] + .label {
+  background-color: #f34541;
+  color: #ffe5e4;
+}
+.button[data-action='delete']:hover {
+  color: #f34541;
+}
+
+button[data-action='confirm'] {
+}
+button[data-action='confirm'] + .label {
+  background-color: #38ba7d;
+  color: #ceffe8;
+}
+button[data-action='confirm']:hover {
+  color: #329c6d;
+}
