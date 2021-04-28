@@ -1,0 +1,16 @@
+* {
+  /* padding: 0px;
+  margin: 0px; */
+}
+h4 {
+  margin: 0px;
+}
+
+fieldset {
+  display: flex;
+  flex-direction: column;
+}
+
+input[type='radio'] {
+  margin-right: 5px;
+}
