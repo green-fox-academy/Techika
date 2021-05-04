@@ -1,25 +1,19 @@
 {
-  "name": "Techika",
+  "name": "Backend",
   "version": "1.0.0",
-  "description": "---\r ```\r   .--.            .--.\r  ( (`\\\\.\"--``--\".//`) )\r   '-.   __   __    .-'\r    /   /__\\ /__\\   \\\r   |    \\ 0/ \\ 0/    |\r   \\     `/   \\`     /\r    `-.  /-\"\"\"-\\  .-`\r      /  '.___.'  \\\r      \\     I     /\r       `;--'`'--;`\r         '.___.'\r ```\r ---",
-  "main": "index.js",
-  "type": "module",
+  "description": "",
+  "main": "reddit-backend.js",
+  "directories": {
+    "test": "tests"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint . --ext .ts",
     "tsc": "./node_modules/typescript/bin/tsc"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/green-fox-academy/Techika.git"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/green-fox-academy/Techika/issues"
-  },
-  "homepage": "https://github.com/green-fox-academy/Techika#readme",
   "devDependencies": {
     "@types/node": "^14.14.20",
     "@types/tape": "^4.13.0",
@@ -39,7 +33,6 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
-    "mysql": "^2.18.1",
-    "node-fetch": "^2.6.1"
+    "mysql": "^2.18.1"
   }
 }
