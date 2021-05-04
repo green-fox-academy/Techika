@@ -30,7 +30,7 @@ window.onload = () => {
   form.buttons.all.forEach((button) => {
     button.addEventListener('click', (e) => {
       e.preventDefault();
-      if (form.buttons.lovecats.disabled === true) {
+      if (form.buttons.lovecats.disabled === true && form.favPet.viktor.checked) {
         alert('Sigh, we still added you to the cat facts list');
       } else {
         alert("Thank you, you've successfully signed up for cat facts");

@@ -13,13 +13,13 @@
     <form action="" id="login-form" autocomplete="off">
       <h2>ACCOUNT LOGIN</h3><br>
       <label>USERNAME
-        <input id="username" type="text"/>
+        <input id="username" type="text" required/>
         
       </label>
       
       <label>PASSWORD
         <div id="pw-container">
-        <input type="text" id="password" /><i class="far fa-eye"></i>
+        <input type="text" id="password" required/><i class="far fa-eye"></i>
         <!-- <input type="checkbox" id="pwToggler" checked/> -->
 
       </div>
@@ -28,7 +28,7 @@
      
       </label>
   
-      <button>Login</button>
+      <button type="submit">Login</button>
     </form>
   </body>
 </html>
