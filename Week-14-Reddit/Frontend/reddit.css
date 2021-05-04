@@ -1,0 +1,22 @@
+body {
+  margin: 0px;
+}
+
+#header-container {
+  background: #373c3f url(./assets/images/bannerBackgroundImage.jpg) no-repeat center / cover;
+  background-image: url(./assets/images/bannerBackgroundImage.jpg);
+  background-position-x: center;
+  background-position-y: top;
+  background-size: cover;
+  background-repeat-x: no-repeat;
+  background-repeat-y: no-repeat;
+  background-attachment: initial;
+  background-origin: initial;
+  background-clip: initial;
+  background-color: rgb(55, 60, 63);
+  background-position: center top;
+  height: 192px;
+  padding: 8px 16px;
+  height: 192px;
+  min-width: 260px;
+}
