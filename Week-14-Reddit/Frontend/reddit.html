@@ -6,29 +6,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Reddit Frontend</title>
     <link rel="stylesheet" href="reddit.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <script type="module" src="reddit.js"></script>
   </head>
   <body>
     <div id="all-container">
-      <div id="header-container"></div>
+      <div id="header-container"><p>SPACE</p></div>
       <div id="content-container">
-        <div id="posts-container">
-          <div id="posts-wrapper"></div>
-        </div>
+        <div id="posts-container"></div>
         <div id="sidebar-container">
-          <div id="sidebar-wrapper">
-            <div id="submit">SUBMIT A NEW POST</div>
-            <div id="about-container">
-              <div id="about-header">ABOUT</div>
-              <div id="about-body">
-                <div id="notion">SSome notion text</div>
-                <ul id="contentinfo">
-                  <li class="listitems">asdf</li>
-                  <li class="listitems">dgfgd</li>
-                  <li class="listitems">fghdf</li>
-                  <li class="listitems">adfgdf</li>
-                  <li class="listitems">gjhghj</li>
-                </ul>
-              </div>
+          <div id="submit"><p>SUBMIT A NEW POST</p></div>
+          <div id="about-container">
+            <div id="about-header">
+              <h4>ABOUT<span> r/space</span></h4>
+            </div>
+            <div id="about-body">
+              <span id="notion">Share & discuss informative content on:</span>
+              <ul id="contentinfo">
+                <li class="listitems">Astrophysics</li>
+                <li class="listitems">Cosmology</li>
+                <li class="listitems">Space Exploration</li>
+                <li class="listitems">Planetary Science</li>
+                <li class="listitems">Astrobiology</li>
+              </ul>
             </div>
           </div>
         </div>
