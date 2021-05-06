@@ -7,6 +7,7 @@
     <title>Reddit Frontend</title>
     <link rel="stylesheet" href="reddit.css" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <script src="https://kit.fontawesome.com/ce4c28f0c8.js" crossorigin="anonymous"></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap"
       rel="stylesheet"
@@ -15,7 +16,10 @@
   </head>
   <body>
     <div id="all-container">
-      <div id="header-container"><p>SPACE</p></div>
+      <div id="status-bar"><span id="login">[log in]</span></div>
+      <div id="header-container">
+        <p>SPACE</p>
+      </div>
       <div id="content-container">
         <div id="posts-container"></div>
         <div id="sidebar-container">
@@ -38,5 +42,26 @@
         </div>
       </div>
     </div>
+    <!-- <div class="popup-wrapper" style="display: none">
+      <form action="" id="login-form" autocomplete="off">
+        <h2>ACCOUNT LOGIN</h2>
+        <br />
+        <label
+          >USERNAME
+          <input id="username" type="text" required />
+        </label>
+        <label
+          >PASSWORD
+          <div id="pw-container">
+            <input type="password" id="password" required /><i class="far fa-eye"></i>
+          </div>
+          <p>Forgot Password?</p>
+        </label>
+        <div class="login-button-stack">
+          <button type="submit">Login</button>
+          <button type="button" class="cancel">Cancel</button>
+        </div>
+      </form>
+    </div> -->
   </body>
 </html>
