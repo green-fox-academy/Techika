@@ -21,6 +21,10 @@ li {
   background-color: #fdfdfd;
   padding: 3px 5px;
 }
+#status-bar #login:hover,
+#submit:hover {
+  cursor: pointer;
+}
 
 #login-form {
   position: absolute;
@@ -219,6 +223,9 @@ h3 {
 }
 .post-buttons a {
   color: rgb(55, 60, 63);
+}
+.arrow:hover {
+  cursor: pointer;
 }
 
 /* ======= LOGIN FORM ======= */

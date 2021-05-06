@@ -8,9 +8,9 @@ export default {
     return `
     <div class="post-container">
       <div class="post-scores">
-        <img class="vote up" class="arrow up" src="assets/buttons/upvote.png" />
+        <img class="vote arrow up" src="assets/buttons/upvote.png" />
         <span class="vote-count">${postData.score} </span>
-        <img class="vote down" class="arrow down" src="assets/buttons/downvote.png" />
+        <img class="vote arrow down" src="assets/buttons/downvote.png" />
       </div>
       <div class="post-main-container">
         <div class="post-main-wrapper">
@@ -35,7 +35,7 @@ export default {
 
   login: () => {
     return `
-    <div class="popup-wrapper" style="display:none">
+    <div class="login popup-wrapper" style="display:none">
       <form action="" id="login-form" autocomplete="off">
         <h2>ACCOUNT LOGIN</h2>
         <br>
@@ -48,9 +48,29 @@ export default {
           </div>
           <p>Forgot Password?</p>  
         </label>
-        <div class="login-button-stack">
-          <button type="submit">Login</button>
+        <div class="login button-stack">
           <button type="button" class="cancel">Cancel</button>
+          <button type="submit">Login</button>
+        </div>
+      </form>
+    </div>
+    `;
+  },
+  newPost: () => {
+    return `
+    <div class="new-post popup-wrapper" style="display:none">
+      <form action="" id="submit-form" autocomplete="off">
+        <h2>SUBMIT POST</h2>
+        <br>
+        <label>*title
+          <input id="title" type="text" name="title" required/>     
+        </label>   
+        <label>URL
+          <input id="url" type="url" name="url" required/>
+        </label>
+        <div class="submit button-stack">
+          <button type="button" class="cancel">Cancel</button>
+          <button type="submit">Submit</button>
         </div>
       </form>
     </div>

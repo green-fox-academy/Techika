@@ -20,6 +20,11 @@ app.use('/', (req, res, next) => {
   // res.setHeader('Content-Type', 'application/json'); // Turn back on after I don't need the pretty output any more.
   next();
 });
+app.use(function (req, res, next) {
+  res.setHeader('Access-Control-Allow-Headers', 'Accept,content-type,username');
+  next();
+});
+
 app.use(express.json());
 //----------------------------------TEST Connection---------------------------------------
 app.get('/hello', (req, res) => {
