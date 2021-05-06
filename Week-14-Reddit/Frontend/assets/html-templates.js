@@ -6,10 +6,10 @@ export default {
     const daysSince = Math.round((today.getTime() - stampDate.getTime()) / 86400000);
 
     return `
-    <div class="post-container">
+    <div class="post-container" post-id="${postData.id}">
       <div class="post-scores">
         <img class="vote arrow up" src="assets/buttons/upvote.png" />
-        <span class="vote-count">${postData.score} </span>
+        <span class="vote-count">${postData.score}</span>
         <img class="vote arrow down" src="assets/buttons/downvote.png" />
       </div>
       <div class="post-main-container">

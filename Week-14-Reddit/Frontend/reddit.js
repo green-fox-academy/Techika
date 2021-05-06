@@ -40,6 +40,23 @@ window.onload = () => {
           }
         } else if (e.target.closest('#submit')) {
           document.querySelector('.new-post.popup-wrapper').style.display = 'flex';
+        } else if (e.target.matches('.vote')) {
+          const voteDirection = e.target.matches('.down') ? 'downvote' : 'upvote';
+          const postID = e.target.closest('.post-container').getAttribute('post-id');
+          fetch(`http://localhost:8080/posts/${postID}/${voteDirection}`, {
+            method: 'PUT',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+              username: localStorage.getItem('username'),
+            },
+          })
+            .then((res) => res.json())
+            .then((resObj) => {
+              e.target.parentNode.children[1].textContent = resObj[0].score;
+            });
+        } else {
+          console.log(e.target);
         }
 
         // else if (e.target.matches('.login-button-stack .cancel')) {}
@@ -59,7 +76,6 @@ window.onload = () => {
 
           fetch('http://localhost:8080/posts', {
             method: 'POST',
-            // credentials: 'include',
             headers: {
               Accept: 'application/json',
               'Content-Type': 'application/json',
@@ -71,8 +87,7 @@ window.onload = () => {
             }),
           })
             .then((res) => res.json())
-            .then((res) => {
-              console.log(res);
+            .then((resObj) => {
               document.querySelector('.new-post.popup-wrapper').style.display = 'none';
             });
         }
