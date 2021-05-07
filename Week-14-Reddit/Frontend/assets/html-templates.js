@@ -23,8 +23,8 @@ export default {
       </div>
           <div class="post-buttons">
             <span class="blue-text">0 comments</span>
-            <a href="">modify</a>
-            <a href="">remove</a>
+            <a class="modify" href="">modify</a>
+            <a class="remove" href="">remove</a>
           </div>
         </div>
       </div>

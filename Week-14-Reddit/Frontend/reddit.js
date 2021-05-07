@@ -55,11 +55,31 @@ window.onload = () => {
             .then((resObj) => {
               e.target.parentNode.children[1].textContent = resObj[0].score;
             });
-        } else {
-          console.log(e.target);
+        } else if (e.target.matches('.modify')) {
+          alert('The logic is the same... not implemented yet');
+          e.preventDefault();
+        } else if (e.target.matches('.remove')) {
+          e.preventDefault();
+          const postID = e.target.closest('.post-container').getAttribute('post-id');
+          fetch(`http://localhost:8080/posts/${postID}`, {
+            method: 'DELETE',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+              username: localStorage.getItem('username'),
+            },
+          })
+            .then((res) => {
+              if (res.status === 200) {
+                e.target.closest('.post-container').remove();
+              } else if (res.status === 403) {
+                alert('Only the owner can delete a post with owner');
+              }
+            })
+            .catch((err) => {
+              alert(err);
+            });
         }
-
-        // else if (e.target.matches('.login-button-stack .cancel')) {}
       });
       body.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -88,6 +108,7 @@ window.onload = () => {
           })
             .then((res) => res.json())
             .then((resObj) => {
+              document.getElementById('posts-container').innerHTML += templates.post(resObj[0]);
               document.querySelector('.new-post.popup-wrapper').style.display = 'none';
             });
         }
